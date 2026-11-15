@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #368",
+  "description": "Woof Agent #368 - Cooper, a Common card in the Woof Agent collection. A clever Shiba Inu with a fox-like face and a mind of its own.",
+  "image": "https://woof-agent.vercel.app/assets/cooper.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Cooper"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Common"
+    }
+  ]
+}

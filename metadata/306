@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #306",
+  "description": "Woof Agent #306 - Charlie, a Common card in the Woof Agent collection. A cheerful corgi with short legs and a big smile, autumn in dog form.",
+  "image": "https://woof-agent.vercel.app/assets/charlie.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Charlie"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Common"
+    }
+  ]
+}
