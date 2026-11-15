@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #443",
+  "description": "Woof Agent #443 - Teddy, a Common card in the Woof Agent collection. A fluffy cream Pomeranian with a pink bow - a living teddy bear.",
+  "image": "https://woof-agent.vercel.app/assets/teddy.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Teddy"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Common"
+    }
+  ]
+}

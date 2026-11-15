@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #409",
+  "description": "Woof Agent #409 - Duke, a Common card in the Woof Agent collection. An elegant white poodle, proud, poised, and perfectly groomed.",
+  "image": "https://woof-agent.vercel.app/assets/duke.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Duke"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Common"
+    }
+  ]
+}
