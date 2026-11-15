@@ -14,6 +14,7 @@ Model = Meow Cards (researched 2026-11-15, see ~/workspace/research_notes/tren-n
   - Legendary 2 cards × 25 = 50 (ref 0.03 BNB): King Bark 1048–1072, Moonfang 1073–1097
   - Mythic 1 card × 14 = 14 (ref 0.1 BNB): The Alpha 1098–1111
 - **Mint prices (Meow ladder, CONFIRMED 01:31 WIB):** #1 FREE (Agent ID, gas only), #2–10 @ 0.00035 BNB, #11–20 @ 0.00065 BNB. Max 20/wallet. Max 0.00965 BNB/wallet (9×0.00035 + 10×0.00065).
+- **Draw (user 2026-11-16 ~02:07 WIB, "Samakan saja semuanya, hanya jika 1000 mint semua gratis otomatis akan berbayar"):** ONE shared deck 1–1111 for free and paid mints — no paid-only IDs, a free mint can draw any card including The Alpha. **Free cap 1,000 total claims** (1 per Agent ID wallet); once freeMinted reaches 1,000, mintFree() reverts automatically (FreeCapReached) and every mint from then on is paid. No owner action needed to flip it. (This REPLACES the two-deck / paid-only 1001–1111 idea from ~02:05 WIB — that design was never built or deployed.) **Free cap (user 2026-11-16 ~02:07 WIB):** free dan paid draw dari SATU deck yang sama (1–1111, tidak ada ID paid-only). Free mint tutup otomatis setelah 1,000 free claim tercapai — setelah itu semua mint berbayar.
 - **Marketplace (own escrow, Meow-style):** list/delist 0.00025 BNB, seller receives 95%, royalty 5% → BAW (standing wallet rule), listing not below 80% of card ref price.
 - **$WOOF token:** **10M total (5.4M pool / 4.6M treasury), 1,200 WOOF per paid mint, max 22,800/wallet.** Free mint accrues 0. (Rescaled ÷10 from 100M / 12,000 on 2026-11-16 ~02:03 WIB — user: "Sesuaikan token nya saja", matching the 1,111 supply. Original 100M confirmed 01:32 WIB.)
 - **Royalty:** 5% → BAW (standing default).
@@ -39,3 +40,6 @@ Model = Meow Cards (researched 2026-11-15, see ~/workspace/research_notes/tren-n
 - 2026-11-16 ~01:28 WIB: user ordered Woof Card ($WOOF), Meow-style, dog theme.
 - 2026-11-16 ~02:00 WIB: user ordered supply 1,111 ("Buatkan 1,111 saja") — rescaled from 10,000; split 660/282/105/50/14.
 - 2026-11-16 ~02:03 WIB: user ordered token rescaled ("Sesuaikan token nya saja") — $WOOF 100M → 10M, 12,000 → 1,200/paid mint (÷10, matching the 1,111 supply).
+- 2026-11-16 ~02:07 WIB: user simplified the draw rule ("Samakan saja semuanya...") — ONE shared deck 1–1111, free cap 1,000 total claims, then all mints paid. Replaces the two-deck/paid-only idea (never built).
+- 2026-11-16 ~02:05 WIB: user set draw ranges — paid mint 1–1111, free mint 1–1000 only (IDs 1001–1111 paid-only: Titan 1001–1012, Aurora, King Bark, Moonfang, The Alpha).
+- 2026-11-16 ~02:07 WIB: user simplified the rule ("Samakan saja semuanya") — ONE shared deck for free + paid, no paid-only IDs; free mint closes automatically after 1,000 free claims, then all mints are paid. (Replaces the 02:05 draw-range rule.)

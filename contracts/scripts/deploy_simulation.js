@@ -135,6 +135,8 @@ async function main() {
   const refCommon = await nft2.refPriceOf(1);
   const refMythic = await nft2.refPriceOf(1111);
   const quote19 = await nft2.quotePaidFor(agent.address, 18); // agent has 1 paid: 8 low + 10 high
+  const freeCap = await nft2.FREE_CAP();
+  const freeMintedAfterFree = await nft2.freeMinted(); // 1 free mint done above
 
   // Marketplace gas via the local proxy (identical bytecode to mainnet route).
   const proxyDeployTx = await deployer.sendTransaction({ data: PROXY_CREATION });
@@ -177,7 +179,7 @@ async function main() {
       token: tokenPred.predicted,
       maxSupply: 1111,
       maxPerWallet: 20,
-      model: "two-lane random single deck: mintFree() agent-only (1/wallet, accrues 0), mintPaid(uint256) agent-only qty 1-19, paid #1-9 @ 0.00035 BNB / #10-19 @ 0.00065 BNB, flat 1,200 WOOF per paid mint",
+      model: "two-lane random single deck: mintFree() agent-only (1/wallet, accrues 0), free cap 1,000 total claims then mintFree reverts, mintPaid(uint256) agent-only qty 1-19, paid #1-9 @ 0.00035 BNB / #10-19 @ 0.00065 BNB, flat 1,200 WOOF per paid mint",
       priceLowBnb: "0.00035",
       priceHighBnb: "0.00065",
       maxCostPerWalletBnb: "0.00965",
@@ -190,6 +192,8 @@ async function main() {
         refPrice1Bnb: ethers.formatEther(refCommon),
         refPrice1111Bnb: ethers.formatEther(refMythic),
         quote18ForAgentWith1PaidBnb: ethers.formatEther(quote19),
+        freeCap: Number(freeCap),
+        freeMintedAfter1Free: Number(freeMintedAfterFree),
       },
       deterministicProxy: PROXY,
       predictedAddress: nftPred.predicted,

@@ -8,6 +8,6 @@ Woof Agent is a 1,111-supply BEP-721 NFT collection of 24 original dog cards on 
 - Royalty 5% ERC-2981 to 0x36F3D56eAD5D1D6C2434F94DeFcEF732C5C3CbD2 (BAW).
 - Marketplace (own escrow): seller 95%, royalty 5%, list/cancel fee 0.00025 BNB, floor >= 80% of card ref price.
 - Language: English only. No X handle yet.
-- Status: PREVIEW — contracts NOT deployed. CREATE2 predictions (salt 0): WOOF token 0x7Df4B409D87129B2689A2Fb285e871a127519958, NFT 0x2FFa448BCB2ce40716066e85650cE743621eb96E, Market 0xD6309FB2bBB21312dD1a0768215d9da71c58516d.
+- Status: PREVIEW — contracts NOT deployed. CREATE2 predictions (salt 0): WOOF token 0x7Df4B409D87129B2689A2Fb285e871a127519958, NFT 0xBb9bA68C8E99651450F099C431eb530a71C712bE, Market 0x447453a9055e511Df2CcE7f33D1165085B6716b2.
 - Planned baseURI (unconfirmed): https://woof-agent.vercel.app/metadata/
 - Page: push/index.html + push/market.html (preview state, mint disabled). Metadata: 1,111 files in metadata/. Contracts: Hardhat 0.8.24, tests 23/23 pass.

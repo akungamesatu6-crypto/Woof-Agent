@@ -29,7 +29,7 @@
     "token": "0x7Df4B409D87129B2689A2Fb285e871a127519958",
     "maxSupply": 1111,
     "maxPerWallet": 20,
-    "model": "two-lane random single deck: mintFree() agent-only (1/wallet, accrues 0), mintPaid(uint256) agent-only qty 1-19, paid #1-9 @ 0.00035 BNB / #10-19 @ 0.00065 BNB, flat 1,200 WOOF per paid mint",
+    "model": "two-lane random single deck: mintFree() agent-only (1/wallet, accrues 0), free cap 1,000 total claims then mintFree reverts, mintPaid(uint256) agent-only qty 1-19, paid #1-9 @ 0.00035 BNB / #10-19 @ 0.00065 BNB, flat 1,200 WOOF per paid mint",
     "priceLowBnb": "0.00035",
     "priceHighBnb": "0.00065",
     "maxCostPerWalletBnb": "0.00965",
@@ -41,43 +41,45 @@
       "card1": "Biscuit",
       "refPrice1Bnb": "0.002",
       "refPrice1111Bnb": "0.1",
-      "quote18ForAgentWith1PaidBnb": "0.0093"
+      "quote18ForAgentWith1PaidBnb": "0.0093",
+      "freeCap": 1000,
+      "freeMintedAfter1Free": 1
     },
     "deterministicProxy": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
-    "predictedAddress": "0x2FFa448BCB2ce40716066e85650cE743621eb96E",
-    "creationBytes": 12441,
-    "inputDataBytes": 12473,
-    "creationCodeKeccak": "0xe4aad76244c5577cd7982baebd3af5f193dbf49b623094005d2d91bd896fd5c2",
+    "predictedAddress": "0xBb9bA68C8E99651450F099C431eb530a71C712bE",
+    "creationBytes": 12524,
+    "inputDataBytes": 12556,
+    "creationCodeKeccak": "0x9c2ae827c50708663b35ecc6821776ce2f2e9bae19d2f649fb2a151b2e4da503",
     "gas": {
-      "deploy": 2644883,
-      "setBaseURI": 32022,
+      "deploy": 2662820,
+      "setBaseURI": 32044,
       "setMintOpen": 45893,
-      "freeMint": 200393,
+      "freeMint": 200516,
       "paidSingle": 215137,
-      "paidBulk19": 1191266
+      "paidBulk19": 1193058
     },
     "mintOpenAtDeploy": false,
     "localDeployAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
   },
   "marketplace": {
     "contract": "WoofAgentMarketplace",
-    "nft": "0x2FFa448BCB2ce40716066e85650cE743621eb96E",
+    "nft": "0xBb9bA68C8E99651450F099C431eb530a71C712bE",
     "platformFee": "0%",
     "royalty": "5% via royaltyInfo, fallback 5% to owner",
     "listFeeBnb": "0.00025",
     "floorRule": "80% of tier ref price (Common 0.002 / Rare 0.005 / Epic 0.012 / Legendary 0.03 / Mythic 0.1 BNB)",
     "deterministicProxy": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
-    "predictedAddress": "0xD6309FB2bBB21312dD1a0768215d9da71c58516d",
+    "predictedAddress": "0x447453a9055e511Df2CcE7f33D1165085B6716b2",
     "creationBytes": 5763,
     "inputDataBytes": 5795,
-    "creationCodeKeccak": "0xa29972eb90895510049a4a43b3b1cab9606d463733d4fcde91bc77f5539609a8",
+    "creationCodeKeccak": "0xa41568bc4f91ca36f62e5eb700099b562ee250a265f49b33695400c3db29a4a2",
     "gas": {
       "deployPlain": 1256385,
       "deployViaProxy": "1278498"
     },
     "localDeployAddress": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
   },
-  "totalDeployGas": "4856301",
-  "totalDeployCostBnbAt0_05gwei": 0.00024281505,
+  "totalDeployGas": "4874238",
+  "totalDeployCostBnbAt0_05gwei": 0.0002437119,
   "note": "SIMULATION ONLY — no mainnet transaction was sent. Predicted addresses are CREATE2 addresses via the deterministic deployment proxy with salt 0 (same route as Archon/Sonofluidic/HATCHIEggy/NEKART/LunarAgentRion/HakunaAgent/MiChan/PanduAGENT/Sakura/Bird and The Bees, whose predictions matched on-chain exactly). Mint stays CLOSED after deploy (mintOpen=false in the constructor); opening requires a separate owner setMintOpen(true) call, and token.setMinter(nft) must be called by the owner after the NFT deploys. baseURI assumes the Vercel project will be named woof-agent — if the created project name differs, the owner must call setBaseURI before opening mint."
 }

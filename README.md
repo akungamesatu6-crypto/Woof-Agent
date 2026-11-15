@@ -5,6 +5,7 @@
 - **Status: PREVIEW — contracts NOT deployed yet.** The page at `push/index.html` is in preview mode (mint disabled, counters show 0). Deploy needs the owner's explicit confirmation.
 - Chain: BNB Smart Chain (56), BEP-721, random deck-draw (swap-and-pop).
 - Mint is agent-only: Binance Agentic Wallet + SPACE ID Agent ID (registry `0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F`, `msg.sender == tx.origin`). No allowlist.
+- Draw: ONE shared deck (swap-and-pop), free and paid draw the same 1–1111 range — no paid-only IDs. Free cap: first 1,000 free claims overall (1/wallet); mintFree closes automatically at 1,000, then all mints are paid.
 
 ## Spec (confirmed)
 
@@ -16,7 +17,7 @@
 | Epic (3 × 35, ref 0.012) | Phantom 943–977, Titan 978–1012, Aurora 1013–1047 |
 | Legendary (2 × 25, ref 0.03) | King Bark 1048–1072, Moonfang 1073–1097 |
 | Mythic (1 × 14, ref 0.1) | The Alpha 1098–1111 |
-| Mint prices | #1 FREE (Agent ID) · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20/wallet · max 0.00965 BNB/wallet |
+| Mint prices | #1 FREE (Agent ID) · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20/wallet · max 0.00965 BNB/wallet · free cap 1,000 total claims |
 | $WOOF | 10M total — 5.4M reward pool (held by token contract) / 4.6M treasury (owner). Flat 1,200 WOOF per PAID mint, free mint accrues 0, max 22,800/wallet. Pool covers 4,500 paid mints; max possible paid mints ≈ 1,055 (1,111 supply), so the pool is never the binding guard. |
 | Royalty | 5% ERC-2981 → `0x36F3D56eAD5D1D6C2434F94DeFcEF732C5C3CbD2` (BAW — owner + royalty + mint revenue) |
 | Marketplace | Own escrow — seller 95% / royalty 5%, list & cancel fee 0.00025 BNB, floor ≥ 80% of the card's ref price |
@@ -28,10 +29,10 @@ Language: English only. No X handle yet — do not invent one.
 | Contract | Predicted address |
 |---|---|
 | WOOF token | `0x7Df4B409D87129B2689A2Fb285e871a127519958` |
-| Woof Agent NFT | `0x2FFa448BCB2ce40716066e85650cE743621eb96E` |
-| Woof Agent Marketplace | `0xD6309FB2bBB21312dD1a0768215d9da71c58516d` |
+| Woof Agent NFT | `0xBb9bA68C8E99651450F099C431eb530a71C712bE` |
+| Woof Agent Marketplace | `0x447453a9055e511Df2CcE7f33D1165085B6716b2` |
 
-Estimated deploy cost at 0.05 gwei: ~0.0002428 BNB total (token 885,585 gas / NFT 2,644,883 / market 1,278,498 via proxy). After deploy, the owner must call: token `setMinter(NFT)`, then NFT `setMintOpen(true)` — and set the three addresses in `push/index.html` + `push/market.html` (search for `var NFT = null` / `var MARKET = null`), plus the planned baseURI below.
+Estimated deploy cost at 0.05 gwei: ~0.0002437 BNB total (token 885,585 gas / NFT 2,662,820 / market 1,278,498 via proxy). After deploy, the owner must call: token `setMinter(NFT)`, then NFT `setMintOpen(true)` — and set the three addresses in `push/index.html` + `push/market.html` (search for `var NFT = null` / `var MARKET = null`), plus the planned baseURI below.
 
 **Planned baseURI (UNCONFIRMED — Vercel project `woof-agent` not created yet):** `https://woof-agent.vercel.app/metadata/` — if the final Vercel name differs, call `setBaseURI` on the NFT after deploy.
 

@@ -1,6 +1,7 @@
 // Woof Agent NFT + WOOF token tests — RANDOM single-deck two-lane model.
 // FREE lane: mintFree(), Agent ID ONLY, 1 per wallet, accrues 0 WOOF,
 // draws from the SAME deck as paid (any tier, ids 1-1111).
+// FREE CAP: first 1,000 free claims overall; mintFree reverts after that.
 // PAID lane: mintPaid(qty), Agent ID ONLY, qty 1-19 per call, price by
 // PAID count: paid #1-9 @ 0.00035 BNB, paid #10-19 @ 0.00065 BNB.
 // Max 19 paid / 20 total per wallet. Each paid mint accrues a FLAT
@@ -56,6 +57,7 @@ describe("Woof Agent NFT + WOOF token (random single-deck)", function () {
     expect(await nft.MAX_SUPPLY()).to.equal(1111);
     expect(await nft.MAX_PER_WALLET()).to.equal(20);
     expect(await nft.FREE_PER_WALLET()).to.equal(1);
+    expect(await nft.FREE_CAP()).to.equal(1000);
     expect(await nft.MAX_PAID_PER_WALLET()).to.equal(19);
     expect(await nft.PRICE_PAID_LOW()).to.equal(PRICE_LOW);
     expect(await nft.PRICE_PAID_HIGH()).to.equal(PRICE_HIGH);
@@ -325,5 +327,72 @@ describe("Woof Agent NFT + WOOF token (random single-deck)", function () {
     expect(await nft.tokenURI(freeId)).to.equal("https://example.com/meta/" + freeId);
     await nft.connect(owner).setBaseURI(BASE_URI);
     await expect(nft.connect(stranger).setBaseURI("x")).to.be.revertedWithCustomError(nft, "OwnableUnauthorizedAccount");
+  });
+
+  it("free cap: 1,000 free claims from one shared deck, then free closes; paid drains to 1,111", async function () {
+    this.timeout(300000);
+    // Fresh token + NFT so this drain does not disturb the shared deployment.
+    const Token = await ethers.getContractFactory("WoofToken");
+    const t2 = await Token.deploy(owner.address);
+    const NFT = await ethers.getContractFactory("WoofAgentNft");
+    const n2 = await NFT.deploy(BASE_URI, owner.address, await registry.getAddress(), await t2.getAddress());
+    await t2.connect(owner).setMinter(await n2.getAddress());
+    await n2.connect(owner).setMintOpen(true);
+    expect(await n2.FREE_CAP()).to.equal(1000);
+    expect(await n2.freeMinted()).to.equal(0);
+
+    // 1,000 fresh Agent ID wallets, funded via setBalance (no funding txs).
+    const wallets = [];
+    const addrs = [];
+    for (let i = 0; i < 1000; i++) {
+      const w = ethers.Wallet.createRandom().connect(ethers.provider);
+      wallets.push(w);
+      addrs.push(w.address);
+      await ethers.provider.send("hardhat_setBalance", [w.address, "0x8ac7230489e80000"]); // 10 ETH
+    }
+    for (let i = 0; i < addrs.length; i += 100) {
+      await registry.mintBatch(addrs.slice(i, i + 100));
+    }
+    const freeIds = [];
+    for (const w of wallets) {
+      const ids = await mintedIds(n2, await n2.connect(w).mintFree());
+      expect(ids.length).to.equal(1);
+      freeIds.push(ids[0]);
+    }
+    expect(new Set(freeIds).size).to.equal(1000);
+    expect(Math.max(...freeIds)).to.be.above(1000); // free CAN draw top ids — one shared deck
+    expect(Math.min(...freeIds)).to.be.at.least(1);
+    expect(await n2.freeMinted()).to.equal(1000);
+    expect(await n2.totalMinted()).to.equal(1000);
+    expect(await n2.deckRemaining()).to.equal(111);
+    expect(await n2.paidMinted()).to.equal(0);
+
+    // 1,001st free claim reverts — the free lane closes automatically.
+    const extra = ethers.Wallet.createRandom().connect(ethers.provider);
+    await ethers.provider.send("hardhat_setBalance", [extra.address, "0x8ac7230489e80000"]);
+    await registry.mint(extra.address);
+    await expect(n2.connect(extra).mintFree()).to.be.revertedWithCustomError(n2, "FreeCapReached");
+
+    // Paid mints still work and drain the remaining 111 ids to sold out.
+    const payers = [];
+    for (let i = 0; i < 6; i++) {
+      const w = ethers.Wallet.createRandom().connect(ethers.provider);
+      await ethers.provider.send("hardhat_setBalance", [w.address, "0x8ac7230489e80000"]);
+      await registry.mint(w.address);
+      payers.push(w);
+    }
+    const cost19 = PRICE_LOW * 9n + PRICE_HIGH * 10n;
+    for (let i = 0; i < 5; i++) {
+      await n2.connect(payers[i]).mintPaid(19, { value: cost19 });
+    }
+    expect(await n2.totalMinted()).to.equal(1095);
+    await n2.connect(payers[5]).mintPaid(16, { value: PRICE_LOW * 9n + PRICE_HIGH * 7n });
+    expect(await n2.totalMinted()).to.equal(1111);
+    expect(await n2.paidMinted()).to.equal(111);
+    expect(await n2.freeMinted()).to.equal(1000);
+    expect(await n2.deckRemaining()).to.equal(0);
+    await expect(n2.connect(payers[5]).mintPaid(1, { value: PRICE_HIGH }))
+      .to.be.revertedWithCustomError(n2, "SoldOut");
+    await expect(n2.connect(extra).mintFree()).to.be.revertedWithCustomError(n2, "FreeCapReached");
   });
 });

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 // Woof Agent — BSC BEP-721, 24 dog cards, agent-only random mint.
 // Spec (user-confirmed 2026-11-16, main chat):
-//   Supply 1,111, RANDOM token ids (swap-and-pop single deck, NOT VRF).
+//   Supply 1,111, RANDOM token ids (ONE shared swap-and-pop deck,
+//   NOT VRF — free and paid mints draw from the SAME deck, any id
+//   1-1111, including The Alpha). FREE CAP: the first 1,000 free
+//   claims overall are free (1 per wallet); once freeMinted reaches
+//   1,000, mintFree() reverts automatically (FreeCapReached) and every
+//   mint from then on is paid. No owner action needed to flip it.
 //   Rarity by token id (in metadata — 24 artworks):
 //   Common 1-660 (12 cards x 55): Biscuit 1-55, Milo 56-110,
 //   Rocky 111-165, Buddy 166-220, Max 221-275, Charlie 276-330,
@@ -20,6 +25,7 @@
 //   Agent ID registry balance > 0):
 //   - FREE lane: mintFree(), 1 free per wallet, price 0, accrues 0 WOOF.
 //     Free and paid draw from the SAME deck (any tier can be drawn).
+//     Capped at 1,000 free claims TOTAL — see FREE_CAP above.
 //   - PAID lane: mintPaid(qty), qty 1-19 per call, price by PAID count:
 //     paid #1-9 @ 0.00035 BNB each, paid #10-19 @ 0.00065 BNB each
 //     (so a wallet's 19 paid mints cost 9 x 0.00035 + 10 x 0.00065
@@ -59,6 +65,7 @@ contract WoofAgentNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
     uint256 public constant MAX_SUPPLY = 1111;
     uint256 public constant MAX_PER_WALLET = 20;
     uint256 public constant FREE_PER_WALLET = 1;
+    uint256 public constant FREE_CAP = 1000; // total free claims, ever
     uint256 public constant MAX_PAID_PER_WALLET = 19;
     uint256 public constant PRICE_PAID_LOW = 0.00035 ether; // paid #1-9
     uint256 public constant PRICE_PAID_HIGH = 0.00065 ether; // paid #10-19
@@ -93,6 +100,7 @@ contract WoofAgentNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
     error OverLimit();
     error Underpaid(uint256 required);
     error FreeClaimed();
+    error FreeCapReached(); // 1,000 free claims already used
 
     constructor(
         string memory baseURI_,
@@ -218,9 +226,11 @@ contract WoofAgentNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
 
     /// @notice FREE lane: mint the wallet's one free dog card.
     /// Agent ID ONLY. No payment, accrues 0 WOOF. Draws from the same
-    /// deck as paid mints — any tier can be drawn.
+    /// deck as paid mints — any tier can be drawn, any id 1-1111.
+    /// Reverts once the first 1,000 free claims are used (FreeCapReached).
     function mintFree() external nonReentrant onlyAgent {
         if (freeMintedOf[msg.sender] >= FREE_PER_WALLET) revert FreeClaimed();
+        if (freeMinted >= FREE_CAP) revert FreeCapReached();
         if (totalMinted + 1 > MAX_SUPPLY) revert SoldOut();
         uint256 seed = uint256(
             keccak256(abi.encodePacked(blockhash(block.number - 1), block.timestamp, msg.sender, totalMinted, uint256(0)))

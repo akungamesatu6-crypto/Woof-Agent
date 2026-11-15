@@ -206,6 +206,7 @@ footer p{font-size:.85rem}
           <p class="live-count"><span id="liveMinted">0</span> / 1,111 minted</p>
           <div class="live-bar"><div class="live-bar-fill" id="liveBarFill"></div></div>
           <p class="note" id="liveNote">Contracts not deployed yet — this counter reads on-chain once mint opens. <span id="livePaid"></span></p>
+          <p class="note">Free claims used: <strong id="liveFree" style="color:var(--ink)">0 / 1,000</strong> <span id="liveFreeNote">(first 1,000 free claims only — then all mints are paid)</span></p>
           <div class="paw-trail" id="pawTrail" aria-label="Mint milestones"></div>
           <p class="note">Each paw lights up every 111 mints. At 1,111 the pack is complete.</p>
         </div>
@@ -228,7 +229,7 @@ footer p{font-size:.85rem}
     <h2>Three steps to your first dog</h2>
     <div class="steps">
       <div class="step"><div class="n">01</div><h3>Get an Agent ID</h3><p>Minting is agent-only. You need a SPACE ID Agent ID (an .bnb name with an Agent ID) in the same wallet you mint from. Check yours in the mint panel below.</p></div>
-      <div class="step"><div class="n">02</div><h3>Mint — first one free</h3><p>Connect your wallet, claim your FREE first card, then mint up to 19 more. Every mint draws a random card from the deck — you never know which dog you get until it is yours.</p></div>
+      <div class="step"><div class="n">02</div><h3>Mint — first one free</h3><p>Connect your wallet, claim your FREE first card, then mint up to 19 more. Every mint draws a random card from the deck — you never know which dog you get until it is yours. Free claims are limited to the first 1,000 overall: once they are gone, every mint is paid.</p></div>
       <div class="step"><div class="n">03</div><h3>Earn &amp; trade</h3><p>Every paid mint earns 1,200 $WOOF. List cards on the Woof Agent marketplace — the seller keeps 95%, and a 5% royalty supports the project.</p></div>
     </div>
     <p class="note" style="margin-top:14px">Mint is done by your Binance Agentic Wallet agent, or directly from your wallet. The contract enforces everything on-chain: Agent ID gate, wallet limit of 20, and the price ladder. No allowlist — any Agent ID holder can mint.</p>
@@ -283,7 +284,7 @@ footer p{font-size:.85rem}
   <div class="wrap">
     <p class="eyebrow">Rarity</p>
     <h2>Five tiers, one random deck</h2>
-    <p>Every mint draws a random card from a single shuffled deck of 1,111. The deck never favours anyone — the odds below are the deck shares at mint open. Ref prices are the reference prices used for the marketplace floor (listings must be at least 80% of ref price).</p>
+    <p>Every mint draws a random card from a single shuffled deck of 1,111 — free and paid mints share the same deck, so a free mint can pull any card, including The Alpha. The deck never favours anyone — the odds below are the deck shares at mint open. The only limit is the free-claim cap: the first 1,000 free claims are free (1 per Agent ID wallet), then the free mint closes automatically and every mint after that is paid. Ref prices are the reference prices used for the marketplace floor (listings must be at least 80% of ref price).</p>
     <div style="overflow-x:auto">
     <table>
       <thead><tr><th>Tier</th><th>Cards</th><th>Supply</th><th>Chance</th><th>Ref price</th><th>ID range</th></tr></thead>
@@ -305,7 +306,7 @@ footer p{font-size:.85rem}
   <div class="wrap">
     <p class="eyebrow">Mint</p>
     <h2>Claim your dog</h2>
-    <p>Planned prices — <strong style="color:var(--ink)">#1 FREE</strong> · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20 per wallet (1 free + 19 paid) · max 0.00965 BNB per wallet. Minting opens after the contracts deploy. Opening time will be shown here in UTC.</p>
+    <p>Planned prices — <strong style="color:var(--ink)">#1 FREE</strong> · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20 per wallet (1 free + 19 paid) · max 0.00965 BNB per wallet. The free mint is limited to the <strong style="color:var(--ink)">first 1,000 free claims overall</strong> (1 per Agent ID wallet) — once 1,000 free claims are used, the free mint closes automatically and every mint after that is paid. Minting opens after the contracts deploy. Opening time will be shown here in UTC.</p>
     <div class="mint-grid">
       <div class="panel" id="mintPanel">
         <h3>Mint panel</h3>
@@ -340,7 +341,7 @@ footer p{font-size:.85rem}
           <p class="note">Copy this prompt into your Binance Agentic Wallet and let your agent mint for you:</p>
           <div class="agent-prompt" id="agentPrompt">Mint a Woof Agent NFT for me on BNB Chain.
 
-Woof Agent is a 1,111-supply BEP-721 collection. My first mint is FREE (I hold a SPACE ID Agent ID). Paid mints cost 0.00035 BNB for mints #2-10 and 0.00065 BNB for mints #11-20, max 20 per wallet.
+Woof Agent is a 1,111-supply BEP-721 collection. My first mint is FREE (I hold a SPACE ID Agent ID) — free claims are limited to the first 1,000 overall, one per wallet; after that the free mint closes and every mint is paid. Paid mints cost 0.00035 BNB for mints #2-10 and 0.00065 BNB for mints #11-20, max 20 per wallet.
 
 Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F), then call mintFree() for my free mint, or mintPaid(n) for paid mints, on the Woof Agent NFT contract. Confirm the price with quotePaidFor(myAddress, n) before sending, and show me the transaction hash and the token ID I received.</div>
           <button class="btn btn-ghost" id="copyPromptBtn" type="button" style="margin-top:10px">Copy prompt</button>
@@ -421,7 +422,8 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     <details class="faq-item"><summary>What is Woof Agent?</summary><p>Woof Agent is a 1,111-supply NFT collection of 24 original dog cards on BNB Chain. Each mint draws a random card from the deck. It is built for Binance Agentic Wallet users — minting requires a SPACE ID Agent ID.</p></details>
     <details class="faq-item"><summary>How much does it cost to mint?</summary><p>Your first mint is FREE. Paid mints cost 0.00035 BNB for mints #2–10 and 0.00065 BNB for mints #11–20. Maximum 20 mints per wallet, so the most one wallet ever pays is 0.00965 BNB.</p></details>
     <details class="faq-item"><summary>Do I need an Agent ID?</summary><p>Yes. Both the free mint and paid mints are agent-only: the contract checks that your wallet holds a SPACE ID Agent ID. Use the checker in the mint panel to verify any address before you mint.</p></details>
-    <details class="faq-item"><summary>Is the mint random?</summary><p>Yes. The contract draws from a shuffled deck (swap-and-pop), so every remaining card has an equal chance on every mint. There is no way to pick a specific card, and no mint is reserved.</p></details>
+    <details class="faq-item"><summary>Is the mint random?</summary><p>Yes. The contract draws from one shuffled deck (swap-and-pop), shared by free and paid mints, so every remaining card has an equal chance on every mint — a free mint can pull any card, including The Alpha. There is no way to pick a specific card, and no mint is reserved.</p></details>
+    <details class="faq-item"><summary>How long is the free mint open?</summary><p>Until the first 1,000 free claims are used. Each Agent ID wallet gets 1 free mint. Once 1,000 wallets have claimed, the free mint closes automatically — no owner action, no announcement — and every mint after that is paid. Paid mints keep drawing from the same deck until all 1,111 are minted.</p></details>
     <details class="faq-item"><summary>How do I earn $WOOF?</summary><p>Every paid mint accrues a flat 1,200 $WOOF. Free mints accrue 0. Claim your $WOOF on-chain any time. The most one wallet can earn is 22,800 $WOOF (19 paid mints).</p></details>
     <details class="faq-item"><summary>What is the marketplace floor rule?</summary><p>Listings must be priced at 80% or more of the card's reference price: Common 0.002, Rare 0.005, Epic 0.012, Legendary 0.03, Mythic 0.1 BNB. The seller keeps 95% of the sale; 5% is the project royalty. Listing and cancelling each cost 0.00025 BNB.</p></details>
     <details class="faq-item"><summary>When does mint open?</summary><p>Mint opens after the contracts deploy. The opening time will be shown on this page in UTC. This page is currently a preview — minting is disabled until then.</p></details>
@@ -439,6 +441,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
       <div><span>Standard</span><span>BEP-721 (ERC-721), random deck-draw (swap-and-pop)</span></div>
       <div><span>Supply</span><span>1,111 — Common 660 · Rare 282 · Epic 105 · Legendary 50 · Mythic 14</span></div>
       <div><span>Mint price</span><span>#1 FREE · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20 / wallet</span></div>
+      <div><span>Free claims</span><span>First 1,000 free claims overall (1 per Agent ID wallet); mintFree closes automatically at 1,000 — all mints paid after that</span></div>
       <div><span>Gate</span><span>SPACE ID Agent ID — registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F, wallet must be the transaction sender</span></div>
       <div><span>Royalty</span><span>5% (ERC-2981) to 0x36F3D56eAD5D1D6C2434F94DeFcEF732C5C3CbD2</span></div>
       <div><span>$WOOF</span><span>10,000,000 total — 5.4M reward pool / 4.6M treasury — 1,200 per paid mint, max 22,800 / wallet</span></div>
@@ -485,7 +488,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
   var SUPPLY = 1111, MAXW = 20, MAX_PAID = 19;
   var RPCS = ['https://bsc-dataseed.binance.org/','https://bsc-dataseed1.defibit.io/','https://bsc-dataseed2.defibit.io/'];
   var REGISTRY = '0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F';
-  var SEL = { totalMinted:'0xa2309ff8', paidMinted:'0x2806b8fb', deckRemaining:'0xc434f97d', mintOpen:'0x24bbd049',
+  var SEL = { totalMinted:'0xa2309ff8', paidMinted:'0x2806b8fb', freeMinted:'0xd10a1a2b', deckRemaining:'0xc434f97d', mintOpen:'0x24bbd049',
     quote:'0xfba2a03e', mintedOf:'0x617692dd', freeMintedOf:'0xf7b856b1', paidMintedOf:'0xb41e2f7b',
     balanceOf:'0x70a08231', mintFree:'0x8ab53447', mintPaid:'0x26c7f77c' };
   var TIER_TOTALS = [660, 282, 105, 50, 14];
@@ -511,7 +514,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     s.innerHTML = '🐾<small>' + MILESTONES[i].toLocaleString('en-US') + '</small>';
     trail.appendChild(s);
   }
-  var minted = 0, paid = 0, deckLeft = SUPPLY;
+  var minted = 0, paid = 0, freeUsed = 0, deckLeft = SUPPLY;
   function renderLive(){
     var m = Math.max(0, Math.min(SUPPLY, minted));
     var pct = m / SUPPLY * 100;
@@ -521,6 +524,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     $('ringFill').style.strokeDashoffset = (414.7 * (1 - m / SUPPLY)).toFixed(1);
     var paws = trail.children;
     for (var i = 0; i < paws.length; i++) paws[i].classList.toggle('on', m >= MILESTONES[i]);
+    $('liveFree').textContent = freeUsed.toLocaleString('en-US') + ' / 1,000';
     if (NFT){
       $('livePaid').textContent = '· ' + paid.toLocaleString('en-US') + ' paid · ' + deckLeft.toLocaleString('en-US') + ' left in deck';
       $('liveNote').firstChild.textContent = 'Live on-chain. ';
@@ -552,6 +556,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     if (!NFT) { renderLive(); return; }
     rpcCall(NFT, SEL.totalMinted).then(function(r){ minted = parseInt(r, 16) || 0; renderLive(); }).catch(function(){});
     rpcCall(NFT, SEL.paidMinted).then(function(r){ paid = parseInt(r, 16) || 0; renderLive(); }).catch(function(){});
+    rpcCall(NFT, SEL.freeMinted).then(function(r){ freeUsed = parseInt(r, 16) || 0; renderLive(); }).catch(function(){});
     rpcCall(NFT, SEL.deckRemaining).then(function(r){ deckLeft = parseInt(r, 16); renderLive(); }).catch(function(){});
   }
   renderLive();
