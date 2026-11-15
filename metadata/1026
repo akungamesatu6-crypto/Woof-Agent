@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #1026",
+  "description": "Woof Agent #1026 - Aurora, a Epic card in the Woof Agent collection. A Lapphund dancing under the aurora borealis.",
+  "image": "https://woof-agent.vercel.app/assets/aurora.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Aurora"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Epic"
+    }
+  ]
+}

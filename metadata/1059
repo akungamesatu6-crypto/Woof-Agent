@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #1059",
+  "description": "Woof Agent #1059 - King Bark, a Legendary card in the Woof Agent collection. A Cavalier wearing a golden crown - royalty of the pack.",
+  "image": "https://woof-agent.vercel.app/assets/kingbark.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "King Bark"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Legendary"
+    }
+  ]
+}

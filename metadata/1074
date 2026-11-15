@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #1074",
+  "description": "Woof Agent #1074 - Moonfang, a Legendary card in the Woof Agent collection. A wolfdog baring its fangs under the full moon.",
+  "image": "https://woof-agent.vercel.app/assets/moonfang.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Moonfang"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Legendary"
+    }
+  ]
+}
