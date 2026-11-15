@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #670",
+  "description": "Woof Agent #670 - Shadow, a Rare card in the Woof Agent collection. A sleek black Doberman moving through purple shadow, eyes like amber.",
+  "image": "https://woof-agent.vercel.app/assets/shadow.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Shadow"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Rare"
+    }
+  ]
+}

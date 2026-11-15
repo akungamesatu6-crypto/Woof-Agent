@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #635",
+  "description": "Woof Agent #635 - Scout, a Common card in the Woof Agent collection. A Siberian Husky with ice-blue eyes, born to run under northern skies.",
+  "image": "https://woof-agent.vercel.app/assets/scout.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Scout"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Common"
+    }
+  ]
+}
