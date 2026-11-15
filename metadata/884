@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #884",
+  "description": "Woof Agent #884 - Nova, a Rare card in the Woof Agent collection. An Akita wrapped in a cosmic nebula, a star given paws.",
+  "image": "https://woof-agent.vercel.app/assets/nova.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Nova"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Rare"
+    }
+  ]
+}

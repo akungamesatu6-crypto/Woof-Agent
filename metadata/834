@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #834",
+  "description": "Woof Agent #834 - Blaze, a Rare card in the Woof Agent collection. A copper Vizsla burning bright with fire in its eyes.",
+  "image": "https://woof-agent.vercel.app/assets/blaze.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Blaze"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Rare"
+    }
+  ]
+}
