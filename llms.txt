@@ -1,0 +1,13 @@
+# Woof Agent
+
+Woof Agent is a 10,000-supply BEP-721 NFT collection of 24 original dog cards on BNB Chain, modelled on Meow Cards with a $WOOF token added. Minting is agent-only (Binance Agentic Wallet + SPACE ID Agent ID, registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F). Random deck-draw (swap-and-pop).
+
+- Supply 10,000: Common 6,000 (12 cards x 500, ref 0.002 BNB), Rare 2,400 (6 x 400, ref 0.005), Epic 900 (3 x 300, ref 0.012), Legendary 400 (2 x 200, ref 0.03), Mythic 300 (The Alpha, ref 0.1).
+- Mint: #1 FREE via Agent ID, #2-10 @ 0.00035 BNB, #11-20 @ 0.00065 BNB, max 20/wallet, max 0.00965 BNB/wallet.
+- $WOOF: 100M total (54M reward pool / 46M treasury), flat 12,000 WOOF per paid mint, free mint accrues 0, max 228,000/wallet.
+- Royalty 5% ERC-2981 to 0x36F3D56eAD5D1D6C2434F94DeFcEF732C5C3CbD2 (BAW).
+- Marketplace (own escrow): seller 95%, royalty 5%, list/cancel fee 0.00025 BNB, floor >= 80% of card ref price.
+- Language: English only. No X handle yet.
+- Status: PREVIEW — contracts NOT deployed. CREATE2 predictions (salt 0): WOOF token 0xa60D7957F983847c4854576b0e7096AcbDcDD8E7, NFT 0x47dB6Faa41c789538f46d983f4b62B4B5Fe0bFa4, Market 0x32b9ed21906e07b5E2370D54BcB27535cf57b8Ec.
+- Planned baseURI (unconfirmed): https://woof-agent.vercel.app/metadata/
+- Page: push/index.html + push/market.html (preview state, mint disabled). Metadata: 10,000 files in metadata/. Contracts: Hardhat 0.8.24, tests 23/23 pass.

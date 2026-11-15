@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Woof Agent Marketplace — Trade Dog Cards | BNB Chain</title>
+<meta name="description" content="Woof Agent marketplace: list your dog cards, seller keeps 95%, 5% royalty, list fee 0.00025 BNB, floor 80% of ref price.">
+<style>
+:root{--bg:#0b1020;--bg2:#111830;--card:#16203f;--ink:#f4efe4;--ink2:#c9c2ae;--muted:#8b93a7;--gold:#f0b23e;--green:#3fce7c;--red:#ff6b6b;--line:rgba(244,239,228,.12);--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55}
+img{max-width:100%;display:block}
+a{color:var(--gold)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px}
+h1{font-size:1.9rem;line-height:1.15}
+h2{font-size:1.4rem;margin-bottom:10px}
+p{color:var(--ink2)}
+section{padding:36px 0}
+.btn{display:inline-block;border:0;border-radius:999px;padding:12px 20px;font-weight:800;font-size:.95rem;cursor:pointer;text-decoration:none;text-align:center}
+.btn-gold{background:linear-gradient(180deg,#ffd06b,#eda92c);color:#241a05}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.eyebrow{color:var(--gold);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem}
+header{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-in{display:flex;align-items:center;gap:12px;padding:12px 16px;max-width:1060px;margin:0 auto}
+.logo{font-weight:900;font-size:1.15rem;text-decoration:none;color:var(--ink);white-space:nowrap}
+.logo b{color:var(--gold)}
+.header-in nav{display:flex;gap:2px;margin-left:auto}
+.header-in nav a{color:var(--ink2);text-decoration:none;font-size:.85rem;font-weight:700;padding:8px 10px}
+.header-in .btn{padding:9px 16px;font-size:.88rem;margin-left:6px}
+.preview-banner{background:#3a2a05;border-bottom:1px solid #6b4d0d;color:#ffd98a;text-align:center;padding:10px 14px;font-size:.88rem;font-weight:700}
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.lcard{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.lcard img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.lcard .cbody{padding:12px}
+.lcard .cname{font-weight:800}
+.lcard .cmeta{font-size:.8rem;color:var(--muted);margin-top:2px}
+.lcard .price{font-size:1.15rem;font-weight:900;margin-top:8px}
+.badge{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:99px;padding:3px 8px;margin-bottom:6px}
+.badge.common{background:rgba(159,180,199,.16);color:#c3d2de}
+.badge.rare{background:rgba(90,169,255,.16);color:#8ec2ff}
+.badge.epic{background:rgba(176,124,255,.16);color:#cdaaff}
+.badge.legendary{background:rgba(240,178,62,.18);color:#ffd06b}
+.badge.mythic{background:rgba(255,93,143,.16);color:#ff8fb2}
+.stat-list{display:grid;gap:8px;margin-top:10px;font-size:.92rem}
+.stat-list div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.stat-list div b{text-align:right}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.empty{text-align:center;padding:44px 20px;border:1px dashed var(--line);border-radius:var(--radius);margin-top:16px}
+.empty .big{font-size:2.4rem}
+.note{font-size:.82rem;color:var(--muted)}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;word-break:break-all}
+footer{border-top:1px solid var(--line);padding:30px 0 40px;text-align:center}
+footer p{font-size:.85rem}
+@media (max-width:760px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr}
+  .header-in nav{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-in">
+    <a class="logo" href="index.html">Woof <b>Agent</b> 🐶</a>
+    <nav><a href="index.html">Mint</a><a href="index.html#gallery">Cards</a><a href="index.html#rarity">Rarity</a><a href="index.html#token">$WOOF</a></nav>
+    <a class="btn btn-gold" href="index.html#mint">Mint</a>
+  </div>
+</header>
+<div class="preview-banner">PREVIEW — the marketplace contract is not deployed yet. No listings exist. Fees and rules below are the planned specification.</div>
+
+<main>
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Marketplace</p>
+    <h1>Trade your dogs</h1>
+    <p>On-chain escrow: your card is held by the marketplace contract while listed, and moves to the buyer the moment someone pays. The seller keeps <strong style="color:var(--ink)">95%</strong>, a <strong style="color:var(--ink)">5% royalty</strong> supports the project.</p>
+    <div class="two-col">
+      <div class="panel">
+        <h2 style="font-size:1.1rem">Fees &amp; rules</h2>
+        <div class="stat-list">
+          <div><span>Seller receives</span><b>95% of sale price</b></div>
+          <div><span>Royalty (to project)</span><b>5%</b></div>
+          <div><span>List fee</span><b>0.00025 BNB</b></div>
+          <div><span>Cancel / delist fee</span><b>0.00025 BNB</b></div>
+          <div><span>Change price</span><b>Free</b></div>
+          <div><span>Buyer fee</span><b>None</b></div>
+          <div><span>Price floor</span><b>≥ 80% of the card's ref price</b></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2 style="font-size:1.1rem">Reference prices</h2>
+        <div class="stat-list">
+          <div><span>Common (floor 0.0016)</span><b>0.002 BNB</b></div>
+          <div><span>Rare (floor 0.004)</span><b>0.005 BNB</b></div>
+          <div><span>Epic (floor 0.0096)</span><b>0.012 BNB</b></div>
+          <div><span>Legendary (floor 0.024)</span><b>0.03 BNB</b></div>
+          <div><span>Mythic (floor 0.08)</span><b>0.1 BNB</b></div>
+        </div>
+        <p class="note" style="margin-top:12px">The floor stops under-pricing: a listing below 80% of its card's ref price is rejected by the contract.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:36px">Live listings <span class="note" id="listCount"></span></h2>
+    <div class="empty" id="emptyState">
+      <div class="big">🐾</div>
+      <p style="margin-top:8px"><strong style="color:var(--ink)">No listings yet.</strong></p>
+      <p>The marketplace opens after the contracts deploy and the first cards are minted. Check back soon — or mint the first dog and list it yourself.</p>
+      <p style="margin-top:14px"><a class="btn btn-gold" href="index.html#mint">Mint a dog</a></p>
+    </div>
+    <div class="grid" id="listingGrid" style="display:none"></div>
+
+    <div class="panel" style="margin-top:36px">
+      <h2 style="font-size:1.1rem">How listing works</h2>
+      <p style="margin-top:6px">1. Connect your wallet and approve the marketplace to move your card (one-time approval per card).<br>
+      2. List with a price at or above the floor — listing costs 0.00025 BNB.<br>
+      3. Your card sits in escrow. Anyone can buy it at the listed price; the BNB splits 95% to you and 5% royalty automatically.<br>
+      4. Change your price any time for free, or cancel (0.00025 BNB) to get your card back.</p>
+      <p class="note" style="margin-top:12px">Marketplace contract: <span id="marketAddrLine">not deployed yet — the address will appear here after deploy.</span><br>
+      Always verify the contract address on BscScan before approving or sending anything.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--ink)">Woof Agent</strong> — 24 loyal dogs, on-chain. Built on BNB Chain.</p>
+    <p style="margin-top:6px">Collectible NFTs. Nothing here is financial advice or a promise of returns.</p>
+    <p style="margin-top:6px">© 2026 Woof Agent</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var MARKET = null; // Woof Agent marketplace — set after deploy
+  var RPCS = ['https://bsc-dataseed.binance.org/','https://bsc-dataseed1.defibit.io/','https://bsc-dataseed2.defibit.io/'];
+  var SEL = { getListedIds:'0x05337198', getListing:'0x107a274a' };
+  var CARDS = [
+    ['Biscuit','biscuit','Common',1,500],['Milo','milo','Common',501,1000],['Rocky','rocky','Common',1001,1500],
+    ['Buddy','buddy','Common',1501,2000],['Max','max','Common',2001,2500],['Charlie','charlie','Common',2501,3000],
+    ['Cooper','cooper','Common',3001,3500],['Duke','duke','Common',3501,4000],['Teddy','teddy','Common',4001,4500],
+    ['Bailey','bailey','Common',4501,5000],['Lucky','lucky','Common',5001,5500],['Scout','scout','Common',5501,6000],
+    ['Shadow','shadow','Rare',6001,6400],['Luna','luna','Rare',6401,6800],['Storm','storm','Rare',6801,7200],
+    ['Blaze','blaze','Rare',7201,7600],['Nova','nova','Rare',7601,8000],['Zeus','zeus','Rare',8001,8400],
+    ['Phantom','phantom','Epic',8401,8700],['Titan','titan','Epic',8701,9000],['Aurora','aurora','Epic',9001,9300],
+    ['King Bark','kingbark','Legendary',9301,9500],['Moonfang','moonfang','Legendary',9501,9700],
+    ['The Alpha','thealpha','Mythic',9701,10000]
+  ];
+  var REF = { Common:'0.002', Rare:'0.005', Epic:'0.012', Legendary:'0.03', Mythic:'0.1' };
+  function cardFor(id){
+    for (var i = 0; i < CARDS.length; i++) if (id >= CARDS[i][3] && id <= CARDS[i][4]) return CARDS[i];
+    return null;
+  }
+  function padUint(n){ return BigInt(n).toString(16).padStart(64,'0'); }
+  function fmtBNB(wei){ return (Math.round(Number(wei) / 1e18 * 100000) / 100000).toString() + ' BNB'; }
+  function rpcCall(to, data, idx){
+    idx = idx || 0;
+    return fetch(RPCS[idx], { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ jsonrpc:'2.0', id:1, method:'eth_call', params:[{ to: to, data: data }, 'latest'] })
+    }).then(function(r){ return r.json(); }).then(function(j){
+      if (!j || !j.result || j.result === '0x') throw new Error('no result');
+      return j.result;
+    }).catch(function(e){
+      if (idx + 1 < RPCS.length) return rpcCall(to, data, idx + 1);
+      throw e;
+    });
+  }
+  function decodeUintArray(hex){
+    var out = [], body = hex.slice(2);
+    var len = parseInt(body.slice(64, 128), 16);
+    for (var i = 0; i < len; i++) out.push(parseInt(body.slice(128 + i * 64, 192 + i * 64), 16));
+    return out;
+  }
+  function load(){
+    if (!MARKET) return; // preview: no contract yet
+    rpcCall(MARKET, SEL.getListedIds).then(function(res){
+      var ids = decodeUintArray(res);
+      document.getElementById('listCount').textContent = '(' + ids.length + ' listed)';
+      if (!ids.length) return;
+      document.getElementById('emptyState').style.display = 'none';
+      var grid = document.getElementById('listingGrid');
+      grid.style.display = '';
+      ids.forEach(function(id){
+        rpcCall(MARKET, SEL.getListing + padUint(id)).then(function(r){
+          var seller = '0x' + r.slice(26, 66);
+          var price = BigInt('0x' + r.slice(66, 130));
+          var active = parseInt(r.slice(130, 194), 16) === 1;
+          if (!active) return;
+          var c = cardFor(id);
+          var el = document.createElement('div');
+          el.className = 'lcard';
+          el.innerHTML = '<img src="assets/' + c[1] + '.jpg" alt="' + c[0] + ' #' + id + '" loading="lazy">' +
+            '<div class="cbody"><span class="badge ' + c[2].toLowerCase() + '">' + c[2] + '</span>' +
+            '<div class="cname">' + c[0] + ' #' + id + '</div>' +
+            '<div class="cmeta">Seller ' + seller.slice(0, 6) + '…' + seller.slice(-4) + ' · ref ' + REF[c[2]] + ' BNB</div>' +
+            '<div class="price">' + fmtBNB(price) + '</div></div>';
+          grid.appendChild(el);
+        }).catch(function(){});
+      });
+    }).catch(function(){});
+  }
+  load();
+  setInterval(load, 60000);
+})();
+</script>
+</body>
+</html>

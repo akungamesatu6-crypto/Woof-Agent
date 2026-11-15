@@ -1,0 +1,83 @@
+{
+  "token": {
+    "contract": "WoofToken",
+    "name": "WOOF",
+    "symbol": "WOOF",
+    "totalSupply": "100000000",
+    "bonusPool": "54000000",
+    "treasury": "46000000",
+    "owner": "0x36F3D56eAD5D1D6C2434F94DeFcEF732C5C3CbD2",
+    "deterministicProxy": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "predictedAddress": "0xa60D7957F983847c4854576b0e7096AcbDcDD8E7",
+    "creationBytes": 4299,
+    "inputDataBytes": 4331,
+    "creationCodeKeccak": "0x0e60c3c52ae514582ef1b5edb6f1800f62907cfff30485ceff19bf55ea44c0b2",
+    "gas": {
+      "deploy": 885585,
+      "setMinter": 47335,
+      "claim": 77132
+    },
+    "localDeployAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+  },
+  "nft": {
+    "contract": "WoofAgentNft",
+    "name": "Woof Agent",
+    "symbol": "WOOF",
+    "baseURI": "https://woof-agent.vercel.app/metadata/",
+    "owner": "0x36F3D56eAD5D1D6C2434F94DeFcEF732C5C3CbD2",
+    "agentIdRegistry": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+    "token": "0xa60D7957F983847c4854576b0e7096AcbDcDD8E7",
+    "maxSupply": 10000,
+    "maxPerWallet": 20,
+    "model": "two-lane random single deck: mintFree() agent-only (1/wallet, accrues 0), mintPaid(uint256) agent-only qty 1-19, paid #1-9 @ 0.00035 BNB / #10-19 @ 0.00065 BNB, flat 12,000 WOOF per paid mint",
+    "priceLowBnb": "0.00035",
+    "priceHighBnb": "0.00065",
+    "maxCostPerWalletBnb": "0.00965",
+    "bonusPerPaidMint": "12000",
+    "spotCheck": {
+      "bonusId1": "12000.0",
+      "rarity10000": "Mythic",
+      "card10000": "The Alpha",
+      "card1": "Biscuit",
+      "refPrice1Bnb": "0.002",
+      "refPrice10000Bnb": "0.1",
+      "quote18ForAgentWith1PaidBnb": "0.0093"
+    },
+    "deterministicProxy": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "predictedAddress": "0x47dB6Faa41c789538f46d983f4b62B4B5Fe0bFa4",
+    "creationBytes": 12448,
+    "inputDataBytes": 12480,
+    "creationCodeKeccak": "0xb90cb9b27ad1731259248ba7c680e819e6b714f2d8afcf88d7a74652d59243bb",
+    "gas": {
+      "deploy": 2646263,
+      "setBaseURI": 32022,
+      "setMintOpen": 45893,
+      "freeMint": 200393,
+      "paidSingle": 215137,
+      "paidBulk19": 1193058
+    },
+    "mintOpenAtDeploy": false,
+    "localDeployAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+  },
+  "marketplace": {
+    "contract": "WoofAgentMarketplace",
+    "nft": "0x47dB6Faa41c789538f46d983f4b62B4B5Fe0bFa4",
+    "platformFee": "0%",
+    "royalty": "5% via royaltyInfo, fallback 5% to owner",
+    "listFeeBnb": "0.00025",
+    "floorRule": "80% of tier ref price (Common 0.002 / Rare 0.005 / Epic 0.012 / Legendary 0.03 / Mythic 0.1 BNB)",
+    "deterministicProxy": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "predictedAddress": "0x32b9ed21906e07b5E2370D54BcB27535cf57b8Ec",
+    "creationBytes": 5763,
+    "inputDataBytes": 5795,
+    "creationCodeKeccak": "0x29dd835a05d6def59118989be18765234e7fc19f7e980da9cda8c323c173762f",
+    "gas": {
+      "deployPlain": 1256385,
+      "deployViaProxy": "1278498"
+    },
+    "localDeployAddress": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+  },
+  "totalDeployGas": "4857681",
+  "totalDeployCostBnbAt0_05gwei": 0.00024288405,
+  "note": "SIMULATION ONLY — no mainnet transaction was sent. Predicted addresses are CREATE2 addresses via the deterministic deployment proxy with salt 0 (same route as Archon/Sonofluidic/HATCHIEggy/NEKART/LunarAgentRion/HakunaAgent/MiChan/PanduAGENT/Sakura/Bird and The Bees, whose predictions matched on-chain exactly). Mint stays CLOSED after deploy (mintOpen=false in the constructor); opening requires a separate owner setMintOpen(true) call, and token.setMinter(nft) must be called by the owner after the NFT deploys. baseURI assumes the Vercel project will be named woof-agent — if the created project name differs, the owner must call setBaseURI before opening mint."
+}
