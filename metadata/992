@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #992",
+  "description": "Woof Agent #992 - Titan, a Epic card in the Woof Agent collection. A massive Mastiff, bronze and stone, immovable as a mountain.",
+  "image": "https://woof-agent.vercel.app/assets/titan.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Titan"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Epic"
+    }
+  ]
+}

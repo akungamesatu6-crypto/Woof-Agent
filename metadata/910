@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #910",
+  "description": "Woof Agent #910 - Zeus, a Rare card in the Woof Agent collection. A Great Dane crowned in golden lightning, king of the storm.",
+  "image": "https://woof-agent.vercel.app/assets/zeus.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Zeus"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Rare"
+    }
+  ]
+}

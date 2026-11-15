@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #970",
+  "description": "Woof Agent #970 - Phantom, a Epic card in the Woof Agent collection. A spectral Border Collie drifting through blue mist, eyes glowing.",
+  "image": "https://woof-agent.vercel.app/assets/phantom.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Phantom"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Epic"
+    }
+  ]
+}
