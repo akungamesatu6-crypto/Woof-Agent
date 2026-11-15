@@ -1,11 +1,11 @@
 {
   "name": "Woof Agent #215",
-  "description": "Woof Agent #215 - Biscuit, a Common card in the Woof Agent collection. A chubby golden retriever puppy with honey-golden fur and a heart of gold.",
-  "image": "https://woof-agent.vercel.app/assets/biscuit.jpg",
+  "description": "Woof Agent #215 - Buddy, a Common card in the Woof Agent collection. A cheerful chocolate labrador whose smile can brighten any day.",
+  "image": "https://woof-agent.vercel.app/assets/buddy.jpg",
   "attributes": [
     {
       "trait_type": "Card",
-      "value": "Biscuit"
+      "value": "Buddy"
     },
     {
       "trait_type": "Tier",

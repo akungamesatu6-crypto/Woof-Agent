@@ -1,11 +1,11 @@
 {
   "name": "Woof Agent #296",
-  "description": "Woof Agent #296 - Biscuit, a Common card in the Woof Agent collection. A chubby golden retriever puppy with honey-golden fur and a heart of gold.",
-  "image": "https://woof-agent.vercel.app/assets/biscuit.jpg",
+  "description": "Woof Agent #296 - Charlie, a Common card in the Woof Agent collection. A cheerful corgi with short legs and a big smile, autumn in dog form.",
+  "image": "https://woof-agent.vercel.app/assets/charlie.jpg",
   "attributes": [
     {
       "trait_type": "Card",
-      "value": "Biscuit"
+      "value": "Charlie"
     },
     {
       "trait_type": "Tier",
