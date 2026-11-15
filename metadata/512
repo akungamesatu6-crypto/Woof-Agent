@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #512",
+  "description": "Woof Agent #512 - Bailey, a Common card in the Woof Agent collection. A golden cocker spaniel with long wavy ears and gentle amber eyes.",
+  "image": "https://woof-agent.vercel.app/assets/bailey.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Bailey"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Common"
+    }
+  ]
+}
