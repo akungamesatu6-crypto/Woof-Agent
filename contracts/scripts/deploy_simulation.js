@@ -11,9 +11,9 @@
 // setMintOpen(true) — that opening step is a separate owner call, and per
 // the user's launch sequence it happens only after preparations are done.
 // TWO-LANE RANDOM model, BOTH lanes agent-only (user-confirmed 2026-11-16):
-// mintFree() 1 per wallet, draws from the single 10,000-id deck, accrues 0;
+// mintFree() 1 per wallet, draws from the single 1,111-id deck, accrues 0;
 // mintPaid(qty) qty 1-19, price by paid count (paid #1-9 @ 0.00035 BNB,
-// #10-19 @ 0.00065 BNB, max 0.00965 BNB/wallet), flat 12,000 WOOF per
+// #10-19 @ 0.00065 BNB, max 0.00965 BNB/wallet), flat 1,200 WOOF per
 // paid mint. Max 20 per wallet. Marketplace: escrow, seller 95%,
 // royalty 5% to BAW, list/delist fee 0.00025 BNB, floor 80% of tier ref.
 // Planned baseURI: https://woof-agent.vercel.app/metadata/ — the Vercel
@@ -129,11 +129,11 @@ async function main() {
 
   // Rarity/bonus/ref-price spot checks (pure view functions).
   const bonusAny = await nft2.bonusForId(1);
-  const rarityMythic = await nft2.rarityOf(10000);
-  const cardMythic = await nft2.cardNameOf(10000);
+  const rarityMythic = await nft2.rarityOf(1111);
+  const cardMythic = await nft2.cardNameOf(1111);
   const cardCommon = await nft2.cardNameOf(1);
   const refCommon = await nft2.refPriceOf(1);
-  const refMythic = await nft2.refPriceOf(10000);
+  const refMythic = await nft2.refPriceOf(1111);
   const quote19 = await nft2.quotePaidFor(agent.address, 18); // agent has 1 paid: 8 low + 10 high
 
   // Marketplace gas via the local proxy (identical bytecode to mainnet route).
@@ -151,9 +151,9 @@ async function main() {
       contract: "WoofToken",
       name: "WOOF",
       symbol: "WOOF",
-      totalSupply: "100000000",
-      bonusPool: "54000000",
-      treasury: "46000000",
+      totalSupply: "10000000",
+      bonusPool: "5400000",
+      treasury: "4600000",
       owner: OWNER,
       deterministicProxy: PROXY,
       predictedAddress: tokenPred.predicted,
@@ -175,20 +175,20 @@ async function main() {
       owner: OWNER,
       agentIdRegistry: AGENT_ID,
       token: tokenPred.predicted,
-      maxSupply: 10000,
+      maxSupply: 1111,
       maxPerWallet: 20,
-      model: "two-lane random single deck: mintFree() agent-only (1/wallet, accrues 0), mintPaid(uint256) agent-only qty 1-19, paid #1-9 @ 0.00035 BNB / #10-19 @ 0.00065 BNB, flat 12,000 WOOF per paid mint",
+      model: "two-lane random single deck: mintFree() agent-only (1/wallet, accrues 0), mintPaid(uint256) agent-only qty 1-19, paid #1-9 @ 0.00035 BNB / #10-19 @ 0.00065 BNB, flat 1,200 WOOF per paid mint",
       priceLowBnb: "0.00035",
       priceHighBnb: "0.00065",
       maxCostPerWalletBnb: "0.00965",
-      bonusPerPaidMint: "12000",
+      bonusPerPaidMint: "1200",
       spotCheck: {
         bonusId1: ethers.formatEther(bonusAny),
-        rarity10000: rarityMythic,
-        card10000: cardMythic,
+        rarity1111: rarityMythic,
+        card1111: cardMythic,
         card1: cardCommon,
         refPrice1Bnb: ethers.formatEther(refCommon),
-        refPrice10000Bnb: ethers.formatEther(refMythic),
+        refPrice1111Bnb: ethers.formatEther(refMythic),
         quote18ForAgentWith1PaidBnb: ethers.formatEther(quote19),
       },
       deterministicProxy: PROXY,

@@ -7,16 +7,15 @@ Model = Meow Cards (researched 2026-11-15, see ~/workspace/research_notes/tren-n
 ## Proposed spec (following Meow, to confirm)
 - **Name:** Woof Agent. **Token:** $WOOF. **Repo:** https://github.com/akungamesatu6-crypto/Woof-Agent. **NFT symbol (proposal):** WOOF.
 - **Chain:** BNB Chain, BEP-721, agent-only (Binance Agentic Wallet + SPACE ID Agent ID).
-- **Supply:** 10,000. **24 dog cards, 5 tiers, random draw** (same splits as Meow):
-  - Common 12 cards × 500 (ref 0.002 BNB)
-  - Rare 6 cards × 400 (ref 0.005 BNB)
-  - Epic 3 cards × 300 (ref 0.012 BNB)
-  - Legendary 2 cards × 200 (ref 0.03 BNB)
-  - Mythic 1 card × 300 (ref 0.1 BNB)
-- **Mint prices (Meow ladder):** #1 FREE (Agent ID, gas only), #2–10 @ 0.00035 BNB, #11–20 @ 0.00065 BNB. Max 20/wallet. Max 0.00965 BNB/wallet (9×0.00035 + 10×0.00065).
-  - ALTERNATIVE (standing new ladder 2026-11-13): #1 FREE, #2 0.0005, #3 0.001, #4 0.002, #5 0.003, #6 0.005 BNB, max 6/wallet, max 0.0115 BNB/wallet. Awaiting user choice.
+- **Supply:** 1,111 (user order 2026-11-16 ~02:00 WIB: "Buatkan 1,111 saja"). **24 dog cards, 5 tiers, random draw** (Meow proportions rescaled; per-card counts strictly decrease):
+  - Common 12 cards × 55 = 660 (ref 0.002 BNB): Biscuit 1–55, Milo 56–110, Rocky 111–165, Buddy 166–220, Max 221–275, Charlie 276–330, Cooper 331–385, Duke 386–440, Teddy 441–495, Bailey 496–550, Lucky 551–605, Scout 606–660
+  - Rare 6 cards × 47 = 282 (ref 0.005 BNB): Shadow 661–707, Luna 708–754, Storm 755–801, Blaze 802–848, Nova 849–895, Zeus 896–942
+  - Epic 3 cards × 35 = 105 (ref 0.012 BNB): Phantom 943–977, Titan 978–1012, Aurora 1013–1047
+  - Legendary 2 cards × 25 = 50 (ref 0.03 BNB): King Bark 1048–1072, Moonfang 1073–1097
+  - Mythic 1 card × 14 = 14 (ref 0.1 BNB): The Alpha 1098–1111
+- **Mint prices (Meow ladder, CONFIRMED 01:31 WIB):** #1 FREE (Agent ID, gas only), #2–10 @ 0.00035 BNB, #11–20 @ 0.00065 BNB. Max 20/wallet. Max 0.00965 BNB/wallet (9×0.00035 + 10×0.00065).
 - **Marketplace (own escrow, Meow-style):** list/delist 0.00025 BNB, seller receives 95%, royalty 5% → BAW (standing wallet rule), listing not below 80% of card ref price.
-- **$WOOF token (CONFIRMED 2026-11-16 ~01:32 WIB, user: "Ya, 100 juta"):** **100M total (54M pool / 46M treasury), 12,000 WOOF per paid mint, max 228,000/wallet.** Free mint accrues 0.
+- **$WOOF token:** **10M total (5.4M pool / 4.6M treasury), 1,200 WOOF per paid mint, max 22,800/wallet.** Free mint accrues 0. (Rescaled ÷10 from 100M / 12,000 on 2026-11-16 ~02:03 WIB — user: "Sesuaikan token nya saja", matching the 1,111 supply. Original 100M confirmed 01:32 WIB.)
 - **Royalty:** 5% → BAW (standing default).
 - **Language (PROPOSAL):** EN only (like Meow). Unconfirmed.
 - **X:** TBD — user to give handle. Do NOT invent one.
@@ -31,10 +30,12 @@ Model = Meow Cards (researched 2026-11-15, see ~/workspace/research_notes/tren-n
 
 ## Open decisions (awaiting user 2026-11-16)
 1. ~~Price ladder: Meow ladder (max 20/wallet) vs standing new ladder (max 6/wallet)?~~ — CONFIRMED 01:31 WIB: Meow ladder (max 20/wallet).
-2. $WOOF total: proposed 100M (12,000/paid mint) vs 10M (1,200/paid mint) — awaiting confirm.
+2. ~~$WOOF total: proposed 100M (12,000/paid mint) vs 10M (1,200/paid mint)~~ — CONFIRMED 01:32 WIB: 100M (user: "Ya, 100 juta").
 3. Language: EN only?
 4. X handle?
 5. 24 dog names + artwork style approval (after spec lock).
 
 ## History
 - 2026-11-16 ~01:28 WIB: user ordered Woof Card ($WOOF), Meow-style, dog theme.
+- 2026-11-16 ~02:00 WIB: user ordered supply 1,111 ("Buatkan 1,111 saja") — rescaled from 10,000; split 660/282/105/50/14.
+- 2026-11-16 ~02:03 WIB: user ordered token rescaled ("Sesuaikan token nya saja") — $WOOF 100M → 10M, 12,000 → 1,200/paid mint (÷10, matching the 1,111 supply).

@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: MIT
 // Woof Agent — BSC BEP-721, 24 dog cards, agent-only random mint.
 // Spec (user-confirmed 2026-11-16, main chat):
-//   Supply 10,000, RANDOM token ids (swap-and-pop single deck, NOT VRF).
+//   Supply 1,111, RANDOM token ids (swap-and-pop single deck, NOT VRF).
 //   Rarity by token id (in metadata — 24 artworks):
-//   Common 1-6000 (12 cards x 500): Biscuit 1-500, Milo 501-1000,
-//   Rocky 1001-1500, Buddy 1501-2000, Max 2001-2500, Charlie 2501-3000,
-//   Cooper 3001-3500, Duke 3501-4000, Teddy 4001-4500, Bailey 4501-5000,
-//   Lucky 5001-5500, Scout 5501-6000. Ref price 0.002 BNB.
-//   Rare 6001-8400 (6 cards x 400): Shadow 6001-6400, Luna 6401-6800,
-//   Storm 6801-7200, Blaze 7201-7600, Nova 7601-8000, Zeus 8001-8400.
+//   Common 1-660 (12 cards x 55): Biscuit 1-55, Milo 56-110,
+//   Rocky 111-165, Buddy 166-220, Max 221-275, Charlie 276-330,
+//   Cooper 331-385, Duke 386-440, Teddy 441-495, Bailey 496-550,
+//   Lucky 551-605, Scout 606-660. Ref price 0.002 BNB.
+//   Rare 661-942 (6 cards x 47): Shadow 661-707, Luna 708-754,
+//   Storm 755-801, Blaze 802-848, Nova 849-895, Zeus 896-942.
 //   Ref price 0.005 BNB.
-//   Epic 8401-9300 (3 cards x 300): Phantom 8401-8700, Titan 8701-9000,
-//   Aurora 9001-9300. Ref price 0.012 BNB.
-//   Legendary 9301-9700 (2 cards x 200): King Bark 9301-9500,
-//   Moonfang 9501-9700. Ref price 0.03 BNB.
-//   Mythic 9701-10000 (1 card x 300): The Alpha 9701-10000.
+//   Epic 943-1047 (3 cards x 35): Phantom 943-977, Titan 978-1012,
+//   Aurora 1013-1047. Ref price 0.012 BNB.
+//   Legendary 1048-1097 (2 cards x 25): King Bark 1048-1072,
+//   Moonfang 1073-1097. Ref price 0.03 BNB.
+//   Mythic 1098-1111 (1 card x 14): The Alpha 1098-1111.
 //   Ref price 0.1 BNB.
 //   TWO LANES, BOTH agent-only (msg.sender == tx.origin + SPACE ID
 //   Agent ID registry balance > 0):
@@ -23,8 +23,8 @@
 //   - PAID lane: mintPaid(qty), qty 1-19 per call, price by PAID count:
 //     paid #1-9 @ 0.00035 BNB each, paid #10-19 @ 0.00065 BNB each
 //     (so a wallet's 19 paid mints cost 9 x 0.00035 + 10 x 0.00065
-//     = 0.00965 BNB max). Each PAID mint accrues a FLAT 12,000 WOOF.
-//     Free mints accrue nothing. Max 228,000 WOOF per wallet.
+//     = 0.00965 BNB max). Each PAID mint accrues a FLAT 1,200 WOOF.
+//     Free mints accrue nothing. Max 22,800 WOOF per wallet.
 //   Total cap 20 per wallet (1 free + 19 paid). Free and paid can be
 //   claimed in any order.
 //   Mint money: forwarded to the owner (project wallet) in the same tx;
@@ -56,13 +56,13 @@ contract WoofAgentNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
     IAgentID public immutable AGENT_ID;
     IWoofToken public immutable TOKEN;
 
-    uint256 public constant MAX_SUPPLY = 10000;
+    uint256 public constant MAX_SUPPLY = 1111;
     uint256 public constant MAX_PER_WALLET = 20;
     uint256 public constant FREE_PER_WALLET = 1;
     uint256 public constant MAX_PAID_PER_WALLET = 19;
     uint256 public constant PRICE_PAID_LOW = 0.00035 ether; // paid #1-9
     uint256 public constant PRICE_PAID_HIGH = 0.00065 ether; // paid #10-19
-    uint256 public constant BONUS_PER_PAID_MINT = 12_000 ether; // flat 12,000 WOOF
+    uint256 public constant BONUS_PER_PAID_MINT = 1_200 ether; // flat 1,200 WOOF
 
     // Tier ref prices (marketplace floor = 80% of these).
     uint256 public constant REF_COMMON = 0.002 ether;
@@ -77,7 +77,7 @@ contract WoofAgentNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
     bool public mintOpen;
     string private _base;
 
-    // Single deck: ids 1-10000, swap-and-pop lazy identity mapping.
+    // Single deck: ids 1-1111, swap-and-pop lazy identity mapping.
     uint256 private _deckRemaining = MAX_SUPPLY;
     mapping(uint256 => uint256) private _deckAtIndex; // 0 = identity (id = index + 1)
 
@@ -113,45 +113,45 @@ contract WoofAgentNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
         _;
     }
 
-    /// @notice WOOF bonus for a token id — flat 12,000 for every paid mint.
+    /// @notice WOOF bonus for a token id — flat 1,200 for every paid mint.
     function bonusForId(uint256) public pure returns (uint256) {
         return BONUS_PER_PAID_MINT;
     }
 
     /// @notice Rarity tier name for a token id.
     function rarityOf(uint256 id) public pure returns (string memory) {
-        if (id <= 6000) return "Common";
-        if (id <= 8400) return "Rare";
-        if (id <= 9300) return "Epic";
-        if (id <= 9700) return "Legendary";
+        if (id <= 660) return "Common";
+        if (id <= 942) return "Rare";
+        if (id <= 1047) return "Epic";
+        if (id <= 1097) return "Legendary";
         return "Mythic";
     }
 
     /// @notice Dog card name for a token id.
     function cardNameOf(uint256 id) public pure returns (string memory) {
-        if (id <= 500) return "Biscuit";
-        if (id <= 1000) return "Milo";
-        if (id <= 1500) return "Rocky";
-        if (id <= 2000) return "Buddy";
-        if (id <= 2500) return "Max";
-        if (id <= 3000) return "Charlie";
-        if (id <= 3500) return "Cooper";
-        if (id <= 4000) return "Duke";
-        if (id <= 4500) return "Teddy";
-        if (id <= 5000) return "Bailey";
-        if (id <= 5500) return "Lucky";
-        if (id <= 6000) return "Scout";
-        if (id <= 6400) return "Shadow";
-        if (id <= 6800) return "Luna";
-        if (id <= 7200) return "Storm";
-        if (id <= 7600) return "Blaze";
-        if (id <= 8000) return "Nova";
-        if (id <= 8400) return "Zeus";
-        if (id <= 8700) return "Phantom";
-        if (id <= 9000) return "Titan";
-        if (id <= 9300) return "Aurora";
-        if (id <= 9500) return "King Bark";
-        if (id <= 9700) return "Moonfang";
+        if (id <= 55) return "Biscuit";
+        if (id <= 110) return "Milo";
+        if (id <= 165) return "Rocky";
+        if (id <= 220) return "Buddy";
+        if (id <= 275) return "Max";
+        if (id <= 330) return "Charlie";
+        if (id <= 385) return "Cooper";
+        if (id <= 440) return "Duke";
+        if (id <= 495) return "Teddy";
+        if (id <= 550) return "Bailey";
+        if (id <= 605) return "Lucky";
+        if (id <= 660) return "Scout";
+        if (id <= 707) return "Shadow";
+        if (id <= 754) return "Luna";
+        if (id <= 801) return "Storm";
+        if (id <= 848) return "Blaze";
+        if (id <= 895) return "Nova";
+        if (id <= 942) return "Zeus";
+        if (id <= 977) return "Phantom";
+        if (id <= 1012) return "Titan";
+        if (id <= 1047) return "Aurora";
+        if (id <= 1072) return "King Bark";
+        if (id <= 1097) return "Moonfang";
         return "The Alpha";
     }
 
@@ -162,10 +162,10 @@ contract WoofAgentNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
 
     /// @notice Marketplace ref price for a token id (by tier).
     function refPriceOf(uint256 id) public pure returns (uint256) {
-        if (id <= 6000) return REF_COMMON;
-        if (id <= 8400) return REF_RARE;
-        if (id <= 9300) return REF_EPIC;
-        if (id <= 9700) return REF_LEGENDARY;
+        if (id <= 660) return REF_COMMON;
+        if (id <= 942) return REF_RARE;
+        if (id <= 1047) return REF_EPIC;
+        if (id <= 1097) return REF_LEGENDARY;
         return REF_MYTHIC;
     }
 
@@ -237,7 +237,7 @@ contract WoofAgentNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
     /// @notice PAID lane: mint `qty` dog cards. Agent ID ONLY.
     /// qty 1-19 per call, price by the wallet's paid count
     /// (paid #1-9 @ 0.00035 BNB, #10-19 @ 0.00065 BNB).
-    /// Each paid mint accrues a flat 12,000 WOOF.
+    /// Each paid mint accrues a flat 1,200 WOOF.
     function mintPaid(uint256 qty) external payable nonReentrant onlyAgent {
         if (qty == 0 || qty > MAX_PAID_PER_WALLET) revert OverLimit();
         if (paidMintedOf[msg.sender] + qty > MAX_PAID_PER_WALLET) revert OverLimit();

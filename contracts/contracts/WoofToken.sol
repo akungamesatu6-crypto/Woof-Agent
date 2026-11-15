@@ -1,25 +1,24 @@
 // SPDX-License-Identifier: MIT
 // WOOF — BEP-20 bonus token for Woof Agent paid mints.
-// Economics (user-confirmed 2026-11-16):
-//   Total supply 100,000,000 WOOF (18 decimals), fixed at deploy —
-//   NO further minting ever. Bonus pool 54,000,000 WOOF is held by this
-//   token contract itself; the remaining 46,000,000 WOOF is minted to the
+// Economics (user-confirmed 2026-11-16, rescaled ÷10 for the 1,111 supply
+// 2026-11-16 ~02:03 WIB):
+//   Total supply 10,000,000 WOOF (18 decimals), fixed at deploy —
+//   NO further minting ever. Bonus pool 5,400,000 WOOF is held by this
+//   token contract itself; the remaining 4,600,000 WOOF is minted to the
 //   owner at deploy (treasury — owner-controlled, not part of the bonus
-//   pool). Every PAID Woof Agent mint accrues a FLAT 12,000 WOOF for the
+//   pool). Every PAID Woof Agent mint accrues a FLAT 1,200 WOOF for the
 //   minter's wallet, recorded by the NFT contract via accrue() (only the
 //   NFT contract — set by the owner with setMinter() after the NFT
 //   deploys — can accrue). Free mints accrue 0.
-//   Max 228,000 WOOF per wallet (19 paid x 12,000); accrue() enforces
+//   Max 22,800 WOOF per wallet (19 paid x 1,200); accrue() enforces
 //   both the per-wallet cap and the pool cap (total accrued can never
-//   exceed 54,000,000). Worst case the whole paid pool (at most 9,500
-//   paid mints if every wallet also claims its free mint) pays out
-//   9,500 x 12,000 = 114,000,000 — MORE than the 54,000,000 pool, so the
-//   pool cap is the binding guard: once 54,000,000 has accrued, further
-//   accrue() calls revert (OverPoolCap) and paid mints would revert too.
-//   In practice paid mints are a small share of supply (across the
-//   user's 30+ live collections, paid mints are ~2-3% of minted), so the
-//   pool covers ~4,500 paid mints — far above realistic demand. The cap
-//   is documented here so it is never a surprise.
+//   exceed 5,400,000). Worst case the whole paid pool (at most ~1,055
+//   paid mints if every wallet also claims its free mint out of the
+//   1,111 supply) pays out ~1,055 x 1,200 = ~1,266,000 — well inside
+//   the 5,400,000 pool, so the pool cap is never the binding guard in
+//   practice. The pool covers 4,500 paid mints — far above the ~1,055
+//   maximum possible. The cap is documented here so it is never a
+//   surprise.
 //   Claims are retroactive: claim() pays the caller's claimable balance;
 //   claimFor(address) pays a beneficiary's claimable balance and can be
 //   called by any wallet (e.g. an agent claiming for its user).
@@ -32,8 +31,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title WOOF
 contract WoofToken is ERC20, Ownable {
-    uint256 public constant BONUS_POOL = 54_000_000 ether; // held by this contract
-    uint256 public constant MAX_BONUS_PER_WALLET = 228_000 ether; // 19 paid x 12,000
+    uint256 public constant BONUS_POOL = 5_400_000 ether; // held by this contract
+    uint256 public constant MAX_BONUS_PER_WALLET = 22_800 ether; // 19 paid x 1,200
 
     address public minter; // the Woof Agent NFT contract; set by owner after NFT deploy
     uint256 public totalAccrued; // sum of all accrue() amounts; never exceeds BONUS_POOL
@@ -53,7 +52,7 @@ contract WoofToken is ERC20, Ownable {
     constructor(address owner_) ERC20("WOOF", "WOOF") Ownable(owner_) {
         // Pool stays in this contract for claims; remainder goes to the owner.
         _mint(address(this), BONUS_POOL);
-        _mint(owner_, 46_000_000 ether);
+        _mint(owner_, 4_600_000 ether);
     }
 
     /// @notice Claimable WOOF for a wallet (accrued minus already claimed).

@@ -1,10 +1,10 @@
 // Woof Agent NFT + WOOF token tests — RANDOM single-deck two-lane model.
 // FREE lane: mintFree(), Agent ID ONLY, 1 per wallet, accrues 0 WOOF,
-// draws from the SAME deck as paid (any tier, ids 1-10000).
+// draws from the SAME deck as paid (any tier, ids 1-1111).
 // PAID lane: mintPaid(qty), Agent ID ONLY, qty 1-19 per call, price by
 // PAID count: paid #1-9 @ 0.00035 BNB, paid #10-19 @ 0.00065 BNB.
 // Max 19 paid / 20 total per wallet. Each paid mint accrues a FLAT
-// 12,000 WOOF. Revenue forwarded to owner.
+// 1,200 WOOF. Revenue forwarded to owner.
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
@@ -12,7 +12,7 @@ const BASE_URI = "https://woof-agent.vercel.app/metadata/";
 const OWNER_ADDR = "0x36F3D56eAD5D1D6C2434F94DeFcEF732C5C3CbD2"; // project wallet (mainnet)
 const PRICE_LOW = ethers.parseEther("0.00035");
 const PRICE_HIGH = ethers.parseEther("0.00065");
-const BONUS = ethers.parseEther("12000");
+const BONUS = ethers.parseEther("1200");
 
 // Extract Minted event ids from a mint receipt (ids are random).
 async function mintedIds(nft, tx) {
@@ -53,7 +53,7 @@ describe("Woof Agent NFT + WOOF token (random single-deck)", function () {
   it("constructor: name/symbol/supply/limits/prices/ref prices, mint starts CLOSED", async function () {
     expect(await nft.name()).to.equal("Woof Agent");
     expect(await nft.symbol()).to.equal("WOOF");
-    expect(await nft.MAX_SUPPLY()).to.equal(10000);
+    expect(await nft.MAX_SUPPLY()).to.equal(1111);
     expect(await nft.MAX_PER_WALLET()).to.equal(20);
     expect(await nft.FREE_PER_WALLET()).to.equal(1);
     expect(await nft.MAX_PAID_PER_WALLET()).to.equal(19);
@@ -67,74 +67,74 @@ describe("Woof Agent NFT + WOOF token (random single-deck)", function () {
     expect(await nft.REF_MYTHIC()).to.equal(ethers.parseEther("0.1"));
     expect(await nft.totalSupply()).to.equal(0);
     expect(await nft.owner()).to.equal(owner.address);
-    expect(await nft.deckRemaining()).to.equal(10000);
+    expect(await nft.deckRemaining()).to.equal(1111);
 
     const NFT = await ethers.getContractFactory("WoofAgentNft");
     const fresh = await NFT.deploy(BASE_URI, owner.address, await registry.getAddress(), await token.getAddress());
     expect(await fresh.mintOpen()).to.equal(false);
   });
 
-  it("token: name/symbol, 100M total, 54M pool in contract, 46M treasury to owner", async function () {
+  it("token: name/symbol, 10M total, 5.4M pool in contract, 4.6M treasury to owner", async function () {
     expect(await token.name()).to.equal("WOOF");
     expect(await token.symbol()).to.equal("WOOF");
-    expect(await token.totalSupply()).to.equal(ethers.parseEther("100000000"));
-    expect(await token.balanceOf(await token.getAddress())).to.equal(ethers.parseEther("54000000"));
-    expect(await token.balanceOf(owner.address)).to.equal(ethers.parseEther("46000000"));
+    expect(await token.totalSupply()).to.equal(ethers.parseEther("10000000"));
+    expect(await token.balanceOf(await token.getAddress())).to.equal(ethers.parseEther("5400000"));
+    expect(await token.balanceOf(owner.address)).to.equal(ethers.parseEther("4600000"));
     expect(await token.minter()).to.equal(await nft.getAddress());
-    expect(await token.BONUS_POOL()).to.equal(ethers.parseEther("54000000"));
-    expect(await token.MAX_BONUS_PER_WALLET()).to.equal(ethers.parseEther("228000"));
+    expect(await token.BONUS_POOL()).to.equal(ethers.parseEther("5400000"));
+    expect(await token.MAX_BONUS_PER_WALLET()).to.equal(ethers.parseEther("22800"));
   });
 
   it("rarityOf/cardNameOf/refPriceOf: all 24 card boundaries", async function () {
     const cases = [
       [1, "Common", "Biscuit", "0.002"],
-      [500, "Common", "Biscuit", "0.002"],
-      [501, "Common", "Milo", "0.002"],
-      [1000, "Common", "Milo", "0.002"],
-      [1001, "Common", "Rocky", "0.002"],
-      [1500, "Common", "Rocky", "0.002"],
-      [1501, "Common", "Buddy", "0.002"],
-      [2000, "Common", "Buddy", "0.002"],
-      [2001, "Common", "Max", "0.002"],
-      [2500, "Common", "Max", "0.002"],
-      [2501, "Common", "Charlie", "0.002"],
-      [3000, "Common", "Charlie", "0.002"],
-      [3001, "Common", "Cooper", "0.002"],
-      [3500, "Common", "Cooper", "0.002"],
-      [3501, "Common", "Duke", "0.002"],
-      [4000, "Common", "Duke", "0.002"],
-      [4001, "Common", "Teddy", "0.002"],
-      [4500, "Common", "Teddy", "0.002"],
-      [4501, "Common", "Bailey", "0.002"],
-      [5000, "Common", "Bailey", "0.002"],
-      [5001, "Common", "Lucky", "0.002"],
-      [5500, "Common", "Lucky", "0.002"],
-      [5501, "Common", "Scout", "0.002"],
-      [6000, "Common", "Scout", "0.002"],
-      [6001, "Rare", "Shadow", "0.005"],
-      [6400, "Rare", "Shadow", "0.005"],
-      [6401, "Rare", "Luna", "0.005"],
-      [6800, "Rare", "Luna", "0.005"],
-      [6801, "Rare", "Storm", "0.005"],
-      [7200, "Rare", "Storm", "0.005"],
-      [7201, "Rare", "Blaze", "0.005"],
-      [7600, "Rare", "Blaze", "0.005"],
-      [7601, "Rare", "Nova", "0.005"],
-      [8000, "Rare", "Nova", "0.005"],
-      [8001, "Rare", "Zeus", "0.005"],
-      [8400, "Rare", "Zeus", "0.005"],
-      [8401, "Epic", "Phantom", "0.012"],
-      [8700, "Epic", "Phantom", "0.012"],
-      [8701, "Epic", "Titan", "0.012"],
-      [9000, "Epic", "Titan", "0.012"],
-      [9001, "Epic", "Aurora", "0.012"],
-      [9300, "Epic", "Aurora", "0.012"],
-      [9301, "Legendary", "King Bark", "0.03"],
-      [9500, "Legendary", "King Bark", "0.03"],
-      [9501, "Legendary", "Moonfang", "0.03"],
-      [9700, "Legendary", "Moonfang", "0.03"],
-      [9701, "Mythic", "The Alpha", "0.1"],
-      [10000, "Mythic", "The Alpha", "0.1"],
+      [55, "Common", "Biscuit", "0.002"],
+      [56, "Common", "Milo", "0.002"],
+      [110, "Common", "Milo", "0.002"],
+      [111, "Common", "Rocky", "0.002"],
+      [165, "Common", "Rocky", "0.002"],
+      [166, "Common", "Buddy", "0.002"],
+      [220, "Common", "Buddy", "0.002"],
+      [221, "Common", "Max", "0.002"],
+      [275, "Common", "Max", "0.002"],
+      [276, "Common", "Charlie", "0.002"],
+      [330, "Common", "Charlie", "0.002"],
+      [331, "Common", "Cooper", "0.002"],
+      [385, "Common", "Cooper", "0.002"],
+      [386, "Common", "Duke", "0.002"],
+      [440, "Common", "Duke", "0.002"],
+      [441, "Common", "Teddy", "0.002"],
+      [495, "Common", "Teddy", "0.002"],
+      [496, "Common", "Bailey", "0.002"],
+      [550, "Common", "Bailey", "0.002"],
+      [551, "Common", "Lucky", "0.002"],
+      [605, "Common", "Lucky", "0.002"],
+      [606, "Common", "Scout", "0.002"],
+      [660, "Common", "Scout", "0.002"],
+      [661, "Rare", "Shadow", "0.005"],
+      [707, "Rare", "Shadow", "0.005"],
+      [708, "Rare", "Luna", "0.005"],
+      [754, "Rare", "Luna", "0.005"],
+      [755, "Rare", "Storm", "0.005"],
+      [801, "Rare", "Storm", "0.005"],
+      [802, "Rare", "Blaze", "0.005"],
+      [848, "Rare", "Blaze", "0.005"],
+      [849, "Rare", "Nova", "0.005"],
+      [895, "Rare", "Nova", "0.005"],
+      [896, "Rare", "Zeus", "0.005"],
+      [942, "Rare", "Zeus", "0.005"],
+      [943, "Epic", "Phantom", "0.012"],
+      [977, "Epic", "Phantom", "0.012"],
+      [978, "Epic", "Titan", "0.012"],
+      [1012, "Epic", "Titan", "0.012"],
+      [1013, "Epic", "Aurora", "0.012"],
+      [1047, "Epic", "Aurora", "0.012"],
+      [1048, "Legendary", "King Bark", "0.03"],
+      [1072, "Legendary", "King Bark", "0.03"],
+      [1073, "Legendary", "Moonfang", "0.03"],
+      [1097, "Legendary", "Moonfang", "0.03"],
+      [1098, "Mythic", "The Alpha", "0.1"],
+      [1111, "Mythic", "The Alpha", "0.1"],
     ];
     for (const [id, rarity, card, ref] of cases) {
       expect(await nft.rarityOf(id), `rarity ${id}`).to.equal(rarity);
@@ -179,12 +179,12 @@ describe("Woof Agent NFT + WOOF token (random single-deck)", function () {
     await expect(nft.quotePaidFor(agent1.address, 0)).to.be.revertedWithCustomError(nft, "OverLimit");
   });
 
-  it("free mint: agent claims one id 1-10000, accrues 0 WOOF; second free reverts", async function () {
+  it("free mint: agent claims one id 1-1111, accrues 0 WOOF; second free reverts", async function () {
     const tx = await nft.connect(agent1).mintFree();
     const ids = await mintedIds(nft, tx);
     expect(ids.length).to.equal(1);
     freeId = ids[0];
-    expect(freeId).to.be.at.least(1).and.at.most(10000);
+    expect(freeId).to.be.at.least(1).and.at.most(1111);
     expect(await nft.ownerOf(freeId)).to.equal(agent1.address);
     expect(await nft.totalMinted()).to.equal(1);
     expect(await nft.freeMinted()).to.equal(1);
@@ -192,23 +192,23 @@ describe("Woof Agent NFT + WOOF token (random single-deck)", function () {
     expect(await nft.mintedOf(agent1.address)).to.equal(1);
     expect(await nft.freeMintedOf(agent1.address)).to.equal(1);
     expect(await nft.paidMintedOf(agent1.address)).to.equal(0);
-    expect(await nft.deckRemaining()).to.equal(9999);
+    expect(await nft.deckRemaining()).to.equal(1110);
     expect(await token.accrued(agent1.address)).to.equal(0);
     expect(await token.claimable(agent1.address)).to.equal(0);
     expect(await nft.tokenURI(freeId)).to.equal(BASE_URI + freeId);
     expect(await nft.exists(freeId)).to.equal(true);
-    expect(await nft.exists(10000)).to.equal(false);
+    expect(await nft.exists(1111)).to.equal(false);
     await expect(nft.connect(agent1).mintFree()).to.be.revertedWithCustomError(nft, "FreeClaimed");
   });
 
-  it("paid ladder: 9 singles at 0.00035, then 10th costs 0.00065; bonus flat 12,000 each", async function () {
+  it("paid ladder: 9 singles at 0.00035, then 10th costs 0.00065; bonus flat 1,200 each", async function () {
     const ownerBefore = await ethers.provider.getBalance(owner.address);
     const allIds = [];
     for (let i = 0; i < 9; i++) {
       const tx = await nft.connect(agent1).mintPaid(1, { value: PRICE_LOW });
       const ids = await mintedIds(nft, tx);
       expect(ids.length).to.equal(1);
-      expect(ids[0]).to.be.at.least(1).and.at.most(10000);
+      expect(ids[0]).to.be.at.least(1).and.at.most(1111);
       allIds.push(ids[0]);
     }
     expect(new Set(allIds).size).to.equal(9); // all distinct
@@ -236,14 +236,14 @@ describe("Woof Agent NFT + WOOF token (random single-deck)", function () {
     expect(ids.length).to.equal(19);
     expect(new Set(ids).size).to.equal(19);
     for (const id of ids) {
-      expect(id).to.be.at.least(1).and.at.most(10000);
+      expect(id).to.be.at.least(1).and.at.most(1111);
       expect(await nft.ownerOf(id)).to.equal(agent2.address);
     }
     expect(await nft.mintedOf(agent2.address)).to.equal(19);
     expect(await nft.paidMintedOf(agent2.address)).to.equal(19);
     expect(await nft.paidMinted()).to.equal(29);
     expect(await nft.totalMinted()).to.equal(30);
-    expect(await nft.deckRemaining()).to.equal(9970);
+    expect(await nft.deckRemaining()).to.equal(1081);
     expect(await token.accrued(agent2.address)).to.equal(BONUS * 19n);
     await expect(nft.connect(agent2).mintPaid(1, { value: PRICE_HIGH }))
       .to.be.revertedWithCustomError(nft, "OverLimit");
@@ -298,17 +298,17 @@ describe("Woof Agent NFT + WOOF token (random single-deck)", function () {
     expect(await token.balanceOf(agent2.address)).to.equal(agent2Bonus);
   });
 
-  it("token caps: accrue only by minter, wallet cap 228,000 enforced", async function () {
-    await expect(token.connect(stranger).accrue(agent1.address, ethers.parseEther("12000")))
+  it("token caps: accrue only by minter, wallet cap 22,800 enforced", async function () {
+    await expect(token.connect(stranger).accrue(agent1.address, ethers.parseEther("1200")))
       .to.be.revertedWithCustomError(token, "NotMinter");
     // fresh token with a test signer as minter to probe caps directly
     const Token = await ethers.getContractFactory("WoofToken");
     const t2 = await Token.deploy(owner.address);
     await t2.connect(owner).setMinter(stranger.address);
-    await t2.connect(stranger).accrue(buyer.address, ethers.parseEther("228000"));
+    await t2.connect(stranger).accrue(buyer.address, ethers.parseEther("22800"));
     await expect(t2.connect(stranger).accrue(buyer.address, 1))
       .to.be.revertedWithCustomError(t2, "OverWalletCap");
-    expect(await t2.totalAccrued()).to.equal(ethers.parseEther("228000"));
+    expect(await t2.totalAccrued()).to.equal(ethers.parseEther("22800"));
   });
 
   it("royaltyInfo: 5% to owner", async function () {
