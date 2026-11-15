@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #761",
+  "description": "Woof Agent #761 - Storm, a Rare card in the Woof Agent collection. A grey Staffy wrapped in storm clouds and lightning.",
+  "image": "https://woof-agent.vercel.app/assets/storm.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Storm"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Rare"
+    }
+  ]
+}

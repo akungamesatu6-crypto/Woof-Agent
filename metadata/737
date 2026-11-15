@@ -1,0 +1,15 @@
+{
+  "name": "Woof Agent #737",
+  "description": "Woof Agent #737 - Luna, a Rare card in the Woof Agent collection. A fluffy white Samoyed smiling under the crescent moon.",
+  "image": "https://woof-agent.vercel.app/assets/luna.jpg",
+  "attributes": [
+    {
+      "trait_type": "Card",
+      "value": "Luna"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "Rare"
+    }
+  ]
+}
