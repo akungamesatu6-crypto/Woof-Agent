@@ -204,7 +204,7 @@ footer p{font-size:.85rem}
         <div style="min-width:0">
           <p class="live-count"><span id="liveMinted">0</span> / 1,111 minted</p>
           <div class="live-bar"><div class="live-bar-fill" id="liveBarFill"></div></div>
-          <p class="note" id="liveNote">Contracts are deployed — this counter reads live on-chain data. <span id="livePaid"></span></p>
+          <p class="note" id="liveNote">Contracts are deployed — this counter reads live on-chain data.</p>
           <p class="note">Free claims used: <strong id="liveFree" style="color:var(--ink)">0 / 1,000</strong> <span id="liveFreeNote">(first 1,000 free claims only — then all mints are paid)</span></p>
           <div class="paw-trail" id="pawTrail" aria-label="Mint milestones"></div>
           <p class="note">Each paw lights up every 111 mints. At 1,111 the pack is complete.</p>
@@ -487,7 +487,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
   var SUPPLY = 1111, MAXW = 20, MAX_PAID = 19;
   var RPCS = ['https://bsc-dataseed.binance.org/','https://bsc-dataseed1.defibit.io/','https://bsc-dataseed2.defibit.io/'];
   var REGISTRY = '0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F';
-  var SEL = { totalMinted:'0xa2309ff8', paidMinted:'0x2806b8fb', freeMinted:'0xd10a1a2b', deckRemaining:'0xc434f97d', mintOpen:'0x24bbd049',
+  var SEL = { totalMinted:'0xa2309ff8', freeMinted:'0xd10a1a2b', mintOpen:'0x24bbd049',
     quote:'0xfba2a03e', mintedOf:'0x617692dd', freeMintedOf:'0xf7b856b1', paidMintedOf:'0xb41e2f7b',
     balanceOf:'0x70a08231', mintFree:'0x8ab53447', mintPaid:'0x26c7f77c' };
   var TIER_TOTALS = [660, 282, 105, 50, 14];
@@ -513,7 +513,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     s.innerHTML = '🐾<small>' + MILESTONES[i].toLocaleString('en-US') + '</small>';
     trail.appendChild(s);
   }
-  var minted = 0, paid = 0, freeUsed = 0, deckLeft = SUPPLY;
+  var minted = 0, freeUsed = 0;
   function renderLive(){
     var m = Math.max(0, Math.min(SUPPLY, minted));
     var pct = m / SUPPLY * 100;
@@ -525,7 +525,6 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     for (var i = 0; i < paws.length; i++) paws[i].classList.toggle('on', m >= MILESTONES[i]);
     $('liveFree').textContent = freeUsed.toLocaleString('en-US') + ' / 1,000';
     if (NFT){
-      $('livePaid').textContent = '· ' + paid.toLocaleString('en-US') + ' paid · ' + deckLeft.toLocaleString('en-US') + ' left in deck';
       $('liveNote').firstChild.textContent = 'Live on-chain. ';
     }
     // Tier bars: the deck is a single mixed deck, so per-tier minted counts are
@@ -554,9 +553,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
   function pollLive(){
     if (!NFT) { renderLive(); return; }
     rpcCall(NFT, SEL.totalMinted).then(function(r){ minted = parseInt(r, 16) || 0; renderLive(); }).catch(function(){});
-    rpcCall(NFT, SEL.paidMinted).then(function(r){ paid = parseInt(r, 16) || 0; renderLive(); }).catch(function(){});
     rpcCall(NFT, SEL.freeMinted).then(function(r){ freeUsed = parseInt(r, 16) || 0; renderLive(); }).catch(function(){});
-    rpcCall(NFT, SEL.deckRemaining).then(function(r){ deckLeft = parseInt(r, 16); renderLive(); }).catch(function(){});
   }
   renderLive();
   if (NFT) { pollLive(); setInterval(pollLive, 30000); }
