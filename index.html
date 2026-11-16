@@ -159,7 +159,6 @@ footer p{font-size:.85rem}
     <a class="btn btn-gold" href="#mint">Mint</a>
   </div>
 </header>
-<div class="preview-banner" id="top">PREVIEW — contracts are not deployed yet. Minting is disabled. Prices and supply below are the planned specification, not on-chain values.</div>
 
 <main>
 <!-- HERO -->
@@ -205,7 +204,7 @@ footer p{font-size:.85rem}
         <div style="min-width:0">
           <p class="live-count"><span id="liveMinted">0</span> / 1,111 minted</p>
           <div class="live-bar"><div class="live-bar-fill" id="liveBarFill"></div></div>
-          <p class="note" id="liveNote">Contracts not deployed yet — this counter reads on-chain once mint opens. <span id="livePaid"></span></p>
+          <p class="note" id="liveNote">Contracts are deployed — this counter reads live on-chain data. <span id="livePaid"></span></p>
           <p class="note">Free claims used: <strong id="liveFree" style="color:var(--ink)">0 / 1,000</strong> <span id="liveFreeNote">(first 1,000 free claims only — then all mints are paid)</span></p>
           <div class="paw-trail" id="pawTrail" aria-label="Mint milestones"></div>
           <p class="note">Each paw lights up every 111 mints. At 1,111 the pack is complete.</p>
@@ -306,11 +305,11 @@ footer p{font-size:.85rem}
   <div class="wrap">
     <p class="eyebrow">Mint</p>
     <h2>Claim your dog</h2>
-    <p>Planned prices — <strong style="color:var(--ink)">#1 FREE</strong> · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20 per wallet (1 free + 19 paid) · max 0.00965 BNB per wallet. The free mint is limited to the <strong style="color:var(--ink)">first 1,000 free claims overall</strong> (1 per Agent ID wallet) — once 1,000 free claims are used, the free mint closes automatically and every mint after that is paid. Minting opens after the contracts deploy. Opening time will be shown here in UTC.</p>
+    <p>Planned prices — <strong style="color:var(--ink)">#1 FREE</strong> · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20 per wallet (1 free + 19 paid) · max 0.00965 BNB per wallet. The free mint is limited to the <strong style="color:var(--ink)">first 1,000 free claims overall</strong> (1 per Agent ID wallet) — once 1,000 free claims are used, the free mint closes automatically and every mint after that is paid. The contracts are deployed. Mint opens soon — the opening time will be shown here in UTC.</p>
     <div class="mint-grid">
       <div class="panel" id="mintPanel">
         <h3>Mint panel</h3>
-        <p class="note">Minting is currently disabled — this is a preview page. The panel below will go live the moment the contracts deploy.</p>
+        <p class="note">The contracts are deployed. Mint is not open yet — this panel goes live the moment mint opens.</p>
         <button class="btn btn-ghost" id="connectBtn" type="button" style="margin-top:12px">Connect Wallet</button>
         <p class="mp-acct" id="acctLine">Wallet not connected</p>
         <div class="qty-row">
@@ -323,7 +322,7 @@ footer p{font-size:.85rem}
         <p class="note" id="mpWalletInfo" style="margin:12px 0 0"></p>
         <button class="btn btn-gold" id="freeBtn" type="button" style="width:100%;margin-top:14px" disabled>Claim FREE mint</button>
         <button class="btn btn-gold" id="mintBtn" type="button" style="width:100%;margin-top:10px" disabled>Mint</button>
-        <p class="mp-status" id="mpStatus" role="status" aria-live="polite">Preview mode — minting opens after deploy.</p>
+        <p class="mp-status" id="mpStatus" role="status" aria-live="polite">Mint is not open yet — check back soon.</p>
       </div>
       <div>
         <div class="panel" style="margin-bottom:16px">
@@ -426,7 +425,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     <details class="faq-item"><summary>How long is the free mint open?</summary><p>Until the first 1,000 free claims are used. Each Agent ID wallet gets 1 free mint. Once 1,000 wallets have claimed, the free mint closes automatically — no owner action, no announcement — and every mint after that is paid. Paid mints keep drawing from the same deck until all 1,111 are minted.</p></details>
     <details class="faq-item"><summary>How do I earn $WOOF?</summary><p>Every paid mint accrues a flat 1,200 $WOOF. Free mints accrue 0. Claim your $WOOF on-chain any time. The most one wallet can earn is 22,800 $WOOF (19 paid mints).</p></details>
     <details class="faq-item"><summary>What is the marketplace floor rule?</summary><p>Listings must be priced at 80% or more of the card's reference price: Common 0.002, Rare 0.005, Epic 0.012, Legendary 0.03, Mythic 0.1 BNB. The seller keeps 95% of the sale; 5% is the project royalty. Listing and cancelling each cost 0.00025 BNB.</p></details>
-    <details class="faq-item"><summary>When does mint open?</summary><p>Mint opens after the contracts deploy. The opening time will be shown on this page in UTC. This page is currently a preview — minting is disabled until then.</p></details>
+    <details class="faq-item"><summary>When does mint open?</summary><p>The contracts are deployed. Mint is not open yet — the opening time will be shown on this page in UTC once set.</p></details>
     <details class="faq-item"><summary>Is there a roadmap or promise of returns?</summary><p>No. Woof Agent is a collectible. Nothing on this page is a promise of profit, price, or future value. Buy a card because you like the dog.</p></details>
   </div>
 </section>
@@ -446,9 +445,9 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
       <div><span>Royalty</span><span>5% (ERC-2981) to 0x36F3D56eAD5D1D6C2434F94DeFcEF732C5C3CbD2</span></div>
       <div><span>$WOOF</span><span>10,000,000 total — 5.4M reward pool / 4.6M treasury — 1,200 per paid mint, max 22,800 / wallet</span></div>
       <div><span>Marketplace</span><span>Own escrow — seller 95% / royalty 5%, list &amp; cancel fee 0.00025 BNB, floor 80% of ref price</span></div>
-      <div><span>NFT contract</span><span id="nftAddrLine">Not deployed yet — the address will appear here after deploy.</span></div>
-      <div><span>$WOOF contract</span><span id="tokenAddrLine">Not deployed yet — the address will appear here after deploy.</span></div>
-      <div><span>Market contract</span><span id="marketAddrLine">Not deployed yet — the address will appear here after deploy.</span></div>
+      <div><span>NFT contract</span><span id="nftAddrLine" class="mono">0xBb9bA68C8E99651450F099C431eb530a71C712bE</span></div>
+      <div><span>$WOOF contract</span><span id="tokenAddrLine" class="mono">0x7Df4B409D87129B2689A2Fb285e871a127519958</span></div>
+      <div><span>Market contract</span><span id="marketAddrLine" class="mono">0x447453a9055e511Df2CcE7f33D1165085B6716b2</span></div>
       <div><span>Metadata</span><span class="mono">https://woof-agent.vercel.app/metadata/&lt;tokenId&gt;</span></div>
       <div><span>Mint opens</span><span>To be announced (UTC)</span></div>
     </div>
@@ -481,10 +480,10 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
 <script>
 (function(){
   "use strict";
-  // ---- CONFIG (preview: contracts not deployed yet) ----
-  var NFT = null;      // Woof Agent NFT contract — set after deploy
-  var TOKEN = null;    // $WOOF token contract — set after deploy
-  var MARKET = null;   // Woof Agent marketplace — set after deploy
+  // ---- CONFIG (contracts deployed 2026-11-16) ----
+  var NFT = '0xBb9bA68C8E99651450F099C431eb530a71C712bE';
+  var TOKEN = '0x7Df4B409D87129B2689A2Fb285e871a127519958';
+  var MARKET = '0x447453a9055e511Df2CcE7f33D1165085B6716b2';
   var SUPPLY = 1111, MAXW = 20, MAX_PAID = 19;
   var RPCS = ['https://bsc-dataseed.binance.org/','https://bsc-dataseed1.defibit.io/','https://bsc-dataseed2.defibit.io/'];
   var REGISTRY = '0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F';
@@ -618,7 +617,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     freeBtn.disabled = disabled || (freeUsed === true) || myCount >= MAXW;
     mintBtn.disabled = disabled || maxQty <= 0;
     mintBtn.textContent = qty > 1 ? 'Mint ' + qty : 'Mint';
-    if (!NFT) setStatus('', 'Preview mode — minting opens after deploy.');
+    if (!NFT) setStatus('', 'Mint is not open yet — check back soon.');
   }
   function refreshQuote(){
     if (!NFT || !account){ quoteWei = null; render(); return; }
@@ -650,7 +649,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     window.ethereum.request({ method:'eth_requestAccounts' }).then(function(accs){
       account = accs && accs[0] ? accs[0] : null;
       return ensureChain();
-    }).then(function(){ busy = false; setStatus('', NFT ? '' : 'Preview mode — minting opens after deploy.'); refreshWallet(); render(); })
+    }).then(function(){ busy = false; setStatus('', NFT ? '' : 'Mint is not open yet — check back soon.'); refreshWallet(); render(); })
     .catch(function(e){
       busy = false;
       setStatus('err', (e && e.code === 4001) ? 'Rejected in the wallet.' : 'Could not connect wallet.');

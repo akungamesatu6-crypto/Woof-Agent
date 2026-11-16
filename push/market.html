@@ -68,7 +68,6 @@ footer p{font-size:.85rem}
     <a class="btn btn-gold" href="index.html#mint">Mint</a>
   </div>
 </header>
-<div class="preview-banner">PREVIEW — the marketplace contract is not deployed yet. No listings exist. Fees and rules below are the planned specification.</div>
 
 <main>
 <section>
@@ -135,7 +134,7 @@ footer p{font-size:.85rem}
 <script>
 (function(){
   "use strict";
-  var MARKET = null; // Woof Agent marketplace — set after deploy
+  var MARKET = '0x447453a9055e511Df2CcE7f33D1165085B6716b2'; // Woof Agent marketplace (deployed 2026-11-16)
   var RPCS = ['https://bsc-dataseed.binance.org/','https://bsc-dataseed1.defibit.io/','https://bsc-dataseed2.defibit.io/'];
   var SEL = { getListedIds:'0x05337198', getListing:'0x107a274a' };
   var CARDS = [
@@ -175,7 +174,7 @@ footer p{font-size:.85rem}
     return out;
   }
   function load(){
-    if (!MARKET) return; // preview: no contract yet
+    if (!MARKET) return; // contract not configured
     rpcCall(MARKET, SEL.getListedIds).then(function(res){
       var ids = decodeUintArray(res);
       document.getElementById('listCount').textContent = '(' + ids.length + ' listed)';
