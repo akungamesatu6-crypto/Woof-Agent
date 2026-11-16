@@ -305,11 +305,11 @@ footer p{font-size:.85rem}
   <div class="wrap">
     <p class="eyebrow">Mint</p>
     <h2>Claim your dog</h2>
-    <p>Planned prices — <strong style="color:var(--ink)">#1 FREE</strong> · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20 per wallet (1 free + 19 paid) · max 0.00965 BNB per wallet. The free mint is limited to the <strong style="color:var(--ink)">first 1,000 free claims overall</strong> (1 per Agent ID wallet) — once 1,000 free claims are used, the free mint closes automatically and every mint after that is paid. The contracts are deployed. Mint opens soon — the opening time will be shown here in UTC.</p>
+    <p>Planned prices — <strong style="color:var(--ink)">#1 FREE</strong> · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20 per wallet (1 free + 19 paid) · max 0.00965 BNB per wallet. The free mint is limited to the <strong style="color:var(--ink)">first 1,000 free claims overall</strong> (1 per Agent ID wallet) — once 1,000 free claims are used, the free mint closes automatically and every mint after that is paid. Mint is OPEN — it opened on 2026-11-16 at 13:44 UTC.</p>
     <div class="mint-grid">
       <div class="panel" id="mintPanel">
         <h3>Mint panel</h3>
-        <p class="note">The contracts are deployed. Mint is not open yet — this panel goes live the moment mint opens.</p>
+        <p class="note">Mint is OPEN — connect your wallet and claim your FREE first card.</p>
         <button class="btn btn-ghost" id="connectBtn" type="button" style="margin-top:12px">Connect Wallet</button>
         <p class="mp-acct" id="acctLine">Wallet not connected</p>
         <div class="qty-row">
@@ -322,7 +322,7 @@ footer p{font-size:.85rem}
         <p class="note" id="mpWalletInfo" style="margin:12px 0 0"></p>
         <button class="btn btn-gold" id="freeBtn" type="button" style="width:100%;margin-top:14px" disabled>Claim FREE mint</button>
         <button class="btn btn-gold" id="mintBtn" type="button" style="width:100%;margin-top:10px" disabled>Mint</button>
-        <p class="mp-status" id="mpStatus" role="status" aria-live="polite">Mint is not open yet — check back soon.</p>
+        <p class="mp-status" id="mpStatus" role="status" aria-live="polite">Mint is OPEN — connect your wallet to mint.</p>
       </div>
       <div>
         <div class="panel" style="margin-bottom:16px">
@@ -425,7 +425,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     <details class="faq-item"><summary>How long is the free mint open?</summary><p>Until the first 1,000 free claims are used. Each Agent ID wallet gets 1 free mint. Once 1,000 wallets have claimed, the free mint closes automatically — no owner action, no announcement — and every mint after that is paid. Paid mints keep drawing from the same deck until all 1,111 are minted.</p></details>
     <details class="faq-item"><summary>How do I earn $WOOF?</summary><p>Every paid mint accrues a flat 1,200 $WOOF. Free mints accrue 0. Claim your $WOOF on-chain any time. The most one wallet can earn is 22,800 $WOOF (19 paid mints).</p></details>
     <details class="faq-item"><summary>What is the marketplace floor rule?</summary><p>Listings must be priced at 80% or more of the card's reference price: Common 0.002, Rare 0.005, Epic 0.012, Legendary 0.03, Mythic 0.1 BNB. The seller keeps 95% of the sale; 5% is the project royalty. Listing and cancelling each cost 0.00025 BNB.</p></details>
-    <details class="faq-item"><summary>When does mint open?</summary><p>The contracts are deployed. Mint is not open yet — the opening time will be shown on this page in UTC once set.</p></details>
+    <details class="faq-item"><summary>When does mint open?</summary><p>Mint is OPEN — it opened on 2026-11-16 at 13:44 UTC.</p></details>
     <details class="faq-item"><summary>Is there a roadmap or promise of returns?</summary><p>No. Woof Agent is a collectible. Nothing on this page is a promise of profit, price, or future value. Buy a card because you like the dog.</p></details>
   </div>
 </section>
@@ -449,7 +449,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
       <div><span>$WOOF contract</span><span id="tokenAddrLine" class="mono">0x7Df4B409D87129B2689A2Fb285e871a127519958</span></div>
       <div><span>Market contract</span><span id="marketAddrLine" class="mono">0x447453a9055e511Df2CcE7f33D1165085B6716b2</span></div>
       <div><span>Metadata</span><span class="mono">https://woof-agent.vercel.app/metadata/&lt;tokenId&gt;</span></div>
-      <div><span>Mint opens</span><span>To be announced (UTC)</span></div>
+      <div><span>Mint opened</span><span>2026-11-16 13:44 UTC</span></div>
     </div>
   </div>
 </section>
@@ -617,7 +617,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     freeBtn.disabled = disabled || (freeUsed === true) || myCount >= MAXW;
     mintBtn.disabled = disabled || maxQty <= 0;
     mintBtn.textContent = qty > 1 ? 'Mint ' + qty : 'Mint';
-    if (!NFT) setStatus('', 'Mint is not open yet — check back soon.');
+    if (!NFT) setStatus('', 'Mint is OPEN — connect your wallet to mint.');
   }
   function refreshQuote(){
     if (!NFT || !account){ quoteWei = null; render(); return; }
@@ -649,7 +649,7 @@ Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa
     window.ethereum.request({ method:'eth_requestAccounts' }).then(function(accs){
       account = accs && accs[0] ? accs[0] : null;
       return ensureChain();
-    }).then(function(){ busy = false; setStatus('', NFT ? '' : 'Mint is not open yet — check back soon.'); refreshWallet(); render(); })
+    }).then(function(){ busy = false; setStatus('', NFT ? '' : 'Mint is OPEN — connect your wallet to mint.'); refreshWallet(); render(); })
     .catch(function(e){
       busy = false;
       setStatus('err', (e && e.code === 4001) ? 'Rejected in the wallet.' : 'Could not connect wallet.');
