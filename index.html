@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Woof Agent — 24 Loyal Dogs, On-Chain | BNB Chain</title>
+<meta name="description" content="Woof Agent: 1,111 random dog cards on BNB Chain. First mint FREE for Agent ID holders, then 0.00035 / 0.00065 BNB. Earn $WOOF. Trade on the Woof Agent marketplace.">
+<meta property="og:title" content="Woof Agent — 24 Loyal Dogs, On-Chain">
+<meta property="og:description" content="First mint FREE for Agent ID holders. 1,111 dog cards. $WOOF bonus on every paid mint.">
+<meta property="og:image" content="assets/thealpha.jpg">
+<style>
+:root{--bg:#0b1020;--bg2:#111830;--card:#16203f;--ink:#f4efe4;--ink2:#c9c2ae;--muted:#8b93a7;--gold:#f0b23e;--gold2:#d99a26;--green:#3fce7c;--blue:#5aa9ff;--purple:#b07cff;--red:#ff6b6b;--common:#9fb4c7;--rare:#5aa9ff;--epic:#b07cff;--legendary:#f0b23e;--mythic:#ff5d8f;--line:rgba(244,239,228,.12);--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55;-webkit-text-size-adjust:100%}
+img{max-width:100%;display:block}
+a{color:var(--gold)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px}
+h1{font-size:2.15rem;line-height:1.12;letter-spacing:-.01em}
+h2{font-size:1.45rem;line-height:1.2;margin-bottom:10px}
+h3{font-size:1.05rem}
+p{color:var(--ink2)}
+section{padding:44px 0}
+.btn{display:inline-block;border:0;border-radius:999px;padding:13px 22px;font-weight:800;font-size:.98rem;cursor:pointer;text-decoration:none;text-align:center}
+.btn-gold{background:linear-gradient(180deg,#ffd06b,#eda92c);color:#241a05}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.eyebrow{color:var(--gold);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-in{display:flex;align-items:center;gap:12px;padding:12px 16px;max-width:1060px;margin:0 auto}
+.logo{font-weight:900;font-size:1.15rem;text-decoration:none;color:var(--ink);white-space:nowrap}
+.logo b{color:var(--gold)}
+.header-in nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto}
+.header-in nav a{color:var(--ink2);text-decoration:none;font-size:.85rem;font-weight:700;padding:8px 10px;white-space:nowrap}
+.header-in nav a:hover{color:var(--ink)}
+.header-in .btn{padding:9px 16px;font-size:.88rem;margin-left:6px;white-space:nowrap}
+/* preview banner */
+.preview-banner{background:#3a2a05;border-bottom:1px solid #6b4d0d;color:#ffd98a;text-align:center;padding:10px 14px;font-size:.88rem;font-weight:700}
+/* hero */
+.hero{padding:34px 0 30px;background:radial-gradient(900px 480px at 80% -10%,rgba(240,178,62,.20),transparent 60%),radial-gradient(700px 420px at 0% 110%,rgba(90,169,255,.12),transparent 60%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
+.hero-art{border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.hero-art img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.hero p.lede{font-size:1.06rem;margin:14px 0 18px}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px}
+.hero-stats div b{display:block;font-size:1.25rem;color:var(--ink)}
+.hero-stats div span{font-size:.78rem;color:var(--muted)}
+/* live status */
+.live-card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.live-top{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
+.ring{position:relative;width:148px;height:148px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring .ring-img{position:absolute;inset:14px;border-radius:50%;overflow:hidden;border:2px solid var(--gold)}
+.ring .ring-img img{width:100%;height:100%;object-fit:cover}
+.ring .ring-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.25rem;text-shadow:0 2px 8px #000}
+.live-count{font-size:1.7rem;font-weight:900}
+.live-bar{height:10px;background:#0a0f1e;border-radius:99px;overflow:hidden;margin:10px 0 6px;border:1px solid var(--line)}
+.live-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,#eda92c,#ffd06b);transition:width .6s}
+.paw-trail{display:flex;gap:6px;margin:14px 0 4px}
+.paw-trail span{flex:1;text-align:center;font-size:1.15rem;opacity:.28;filter:grayscale(1);transition:.3s}
+.paw-trail span.on{opacity:1;filter:none}
+.paw-trail small{display:block;font-size:.62rem;color:var(--muted);margin-top:2px}
+.tier-rows{margin-top:16px;display:grid;gap:10px}
+.tier-row{display:grid;grid-template-columns:110px 1fr auto;gap:10px;align-items:center;font-size:.88rem}
+.tier-row .tname{font-weight:800}
+.tier-row .tbar{height:8px;background:#0a0f1e;border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.tier-row .tbar i{display:block;height:100%;width:0%}
+.tier-row .tnum{color:var(--muted);white-space:nowrap}
+/* how */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.step{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.step .n{font-size:1.6rem;font-weight:900;color:var(--gold)}
+.step h3{margin:8px 0 6px}
+/* gallery */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.filters button{border:1px solid var(--line);background:var(--bg2);color:var(--ink);border-radius:999px;padding:8px 14px;font-weight:700;font-size:.86rem;cursor:pointer}
+.filters button.on{background:var(--gold);color:#241a05;border-color:var(--gold)}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.card .cbody{padding:12px}
+.card .cname{font-weight:800}
+.card .cmeta{font-size:.8rem;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:99px;padding:3px 8px;margin-bottom:6px}
+.badge.common{background:rgba(159,180,199,.16);color:#c3d2de}
+.badge.rare{background:rgba(90,169,255,.16);color:#8ec2ff}
+.badge.epic{background:rgba(176,124,255,.16);color:#cdaaff}
+.badge.legendary{background:rgba(240,178,62,.18);color:#ffd06b}
+.badge.mythic{background:rgba(255,93,143,.16);color:#ff8fb2}
+/* rarity table */
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:14px}
+th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--gold);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+td .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+/* mint */
+.mint-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.panel h3{margin-bottom:8px}
+.qty-row{display:flex;align-items:center;gap:12px;margin:14px 0}
+.qty-row button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#0a0f1e;color:var(--ink);font-size:1.3rem;cursor:pointer}
+.qty-row button[disabled]{opacity:.4;cursor:not-allowed}
+.qty-val{font-size:1.5rem;font-weight:900;min-width:44px;text-align:center}
+.mp-total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
+.mp-total strong{font-size:1.3rem}
+.mp-free{font-size:.8rem;color:var(--green);font-weight:700}
+.mp-status{margin-top:10px;font-size:.88rem;min-height:1.2em}
+.mp-status.err{color:var(--red)}
+.mp-status.ok{color:var(--green)}
+.mp-acct{font-size:.85rem;color:var(--muted);margin-top:8px;word-break:break-all}
+.agent-prompt{background:#0a0f1e;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:.82rem;color:var(--ink2);white-space:pre-wrap;word-break:break-word;max-height:190px;overflow:auto}
+.check-row{display:flex;gap:8px;margin-top:10px}
+.check-row input{flex:1;background:#0a0f1e;border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:10px 12px;font-size:.88rem;min-width:0}
+.check-row .btn{padding:10px 14px;font-size:.86rem}
+.check-result{font-size:.86rem;margin-top:8px;min-height:1.2em}
+.note{font-size:.82rem;color:var(--muted)}
+/* token / market */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.stat-list{display:grid;gap:8px;margin-top:10px;font-size:.92rem}
+.stat-list div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.stat-list div b{text-align:right}
+/* faq */
+.faq-item{background:var(--bg2);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq-item summary{cursor:pointer;padding:15px 16px;font-weight:800;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item p{padding:0 16px 15px}
+/* details */
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;word-break:break-all}
+.details-grid{display:grid;gap:8px;margin-top:10px;font-size:.9rem}
+.details-grid div{display:grid;grid-template-columns:150px 1fr;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.details-grid div span:first-child{color:var(--muted)}
+/* footer */
+footer{border-top:1px solid var(--line);padding:30px 0 90px;text-align:center}
+footer p{font-size:.85rem}
+/* floating mint */
+.fab{position:fixed;right:16px;bottom:16px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+@media (max-width:760px){
+  h1{font-size:1.7rem}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-art{order:-1}
+  .steps{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .mint-grid,.two-col{grid-template-columns:1fr}
+  .live-top{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .header-in nav{display:none}
+  .tier-row{grid-template-columns:96px 1fr auto}
+  .details-grid div{grid-template-columns:1fr;gap:2px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-in">
+    <a class="logo" href="#top">Woof <b>Agent</b> 🐶</a>
+    <nav>
+      <a href="#live">Live</a><a href="#gallery">Cards</a><a href="#rarity">Rarity</a><a href="#token">Token</a><a href="#marketplace">Market</a><a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-gold" href="#mint">Mint</a>
+  </div>
+</header>
+<div class="preview-banner" id="top">PREVIEW — contracts are not deployed yet. Minting is disabled. Prices and supply below are the planned specification, not on-chain values.</div>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">BNB Chain · BEP-721 · Agent-only mint</p>
+      <h1>24 loyal dogs.<br>One pack.<br>Your Agent ID is the key.</h1>
+      <p class="lede">Woof Agent is a collection of <strong style="color:var(--ink)">1,111 random dog cards</strong> on BNB Chain. Mint #1 is <strong style="color:var(--ink)">FREE</strong> for SPACE ID Agent ID holders. Every paid mint earns <strong style="color:var(--ink)">1,200 $WOOF</strong>. Trade your cards on the built-in marketplace.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="#mint">Mint your dog</a>
+        <a class="btn btn-ghost" href="#gallery">See all 24 cards</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>1,111</b><span>Supply</span></div>
+        <div><b>24</b><span>Dog cards</span></div>
+        <div><b>FREE</b><span>First mint</span></div>
+        <div><b>0.00965 BNB</b><span>Max / wallet</span></div>
+        <div><b>1,200 $WOOF</b><span>Per paid mint</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="assets/thealpha.jpg" alt="The Alpha — the Mythic Woof Agent card, a golden-maned white wolf-dog">
+    </div>
+  </div>
+</section>
+
+<!-- LIVE STATUS -->
+<section id="live" style="padding-top:10px">
+  <div class="wrap">
+    <div class="live-card">
+      <p class="eyebrow">Live status</p>
+      <h2>The pack is gathering</h2>
+      <div class="live-top">
+        <div class="ring">
+          <svg width="148" height="148" viewBox="0 0 148 148">
+            <circle cx="74" cy="74" r="66" fill="none" stroke="#1c2745" stroke-width="9"/>
+            <circle id="ringFill" cx="74" cy="74" r="66" fill="none" stroke="#f0b23e" stroke-width="9" stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"/>
+          </svg>
+          <div class="ring-img"><img src="assets/thealpha.jpg" alt="The Alpha"></div>
+          <div class="ring-pct" id="ringPct">0%</div>
+        </div>
+        <div style="min-width:0">
+          <p class="live-count"><span id="liveMinted">0</span> / 1,111 minted</p>
+          <div class="live-bar"><div class="live-bar-fill" id="liveBarFill"></div></div>
+          <p class="note" id="liveNote">Contracts not deployed yet — this counter reads on-chain once mint opens. <span id="livePaid"></span></p>
+          <p class="note">Free claims used: <strong id="liveFree" style="color:var(--ink)">0 / 1,000</strong> <span id="liveFreeNote">(first 1,000 free claims only — then all mints are paid)</span></p>
+          <div class="paw-trail" id="pawTrail" aria-label="Mint milestones"></div>
+          <p class="note">Each paw lights up every 111 mints. At 1,111 the pack is complete.</p>
+        </div>
+      </div>
+      <div class="tier-rows" id="tierRows">
+        <div class="tier-row"><span class="tname"><i class="dot" style="background:var(--common)"></i>Common</span><span class="tbar"><i id="tierFill0" style="background:var(--common)"></i></span><span class="tnum" id="tierLine0">660 total · 59.41% of deck</span></div>
+        <div class="tier-row"><span class="tname"><i class="dot" style="background:var(--rare)"></i>Rare</span><span class="tbar"><i id="tierFill1" style="background:var(--rare)"></i></span><span class="tnum" id="tierLine1">282 total · 25.38% of deck</span></div>
+        <div class="tier-row"><span class="tname"><i class="dot" style="background:var(--epic)"></i>Epic</span><span class="tbar"><i id="tierFill2" style="background:var(--epic)"></i></span><span class="tnum" id="tierLine2">105 total · 9.45% of deck</span></div>
+        <div class="tier-row"><span class="tname"><i class="dot" style="background:var(--legendary)"></i>Legendary</span><span class="tbar"><i id="tierFill3" style="background:var(--legendary)"></i></span><span class="tnum" id="tierLine3">50 total · 4.50% of deck</span></div>
+        <div class="tier-row"><span class="tname"><i class="dot" style="background:var(--mythic)"></i>Mythic</span><span class="tbar"><i id="tierFill4" style="background:var(--mythic)"></i></span><span class="tnum" id="tierLine4">14 total · 1.26% of deck</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2>Three steps to your first dog</h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>Get an Agent ID</h3><p>Minting is agent-only. You need a SPACE ID Agent ID (an .bnb name with an Agent ID) in the same wallet you mint from. Check yours in the mint panel below.</p></div>
+      <div class="step"><div class="n">02</div><h3>Mint — first one free</h3><p>Connect your wallet, claim your FREE first card, then mint up to 19 more. Every mint draws a random card from the deck — you never know which dog you get until it is yours. Free claims are limited to the first 1,000 overall: once they are gone, every mint is paid.</p></div>
+      <div class="step"><div class="n">03</div><h3>Earn &amp; trade</h3><p>Every paid mint earns 1,200 $WOOF. List cards on the Woof Agent marketplace — the seller keeps 95%, and a 5% royalty supports the project.</p></div>
+    </div>
+    <p class="note" style="margin-top:14px">Mint is done by your Binance Agentic Wallet agent, or directly from your wallet. The contract enforces everything on-chain: Agent ID gate, wallet limit of 20, and the price ladder. No allowlist — any Agent ID holder can mint.</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="background:var(--bg2)">
+  <div class="wrap">
+    <p class="eyebrow">The pack</p>
+    <h2>All 24 cards</h2>
+    <p>Every card is a one-of-a-kind character. Minting is a random draw — any mint can pull any remaining card, including The Alpha.</p>
+    <div class="filters" id="filters">
+      <button class="on" data-filter="all">All 24</button>
+      <button data-filter="common">Common · 12</button>
+      <button data-filter="rare">Rare · 6</button>
+      <button data-filter="epic">Epic · 3</button>
+      <button data-filter="legendary">Legendary · 2</button>
+      <button data-filter="mythic">Mythic · 1</button>
+    </div>
+    <div class="gallery" id="galleryGrid">
+      <div class="card" data-tier="common"><img src="assets/biscuit.jpg" alt="Biscuit — a chubby golden retriever puppy" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Biscuit</div><div class="cmeta">#1–55 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/milo.jpg" alt="Milo — a curious beagle" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Milo</div><div class="cmeta">#56–110 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/rocky.jpg" alt="Rocky — a stocky bulldog with a red bandana" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Rocky</div><div class="cmeta">#111–165 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/buddy.jpg" alt="Buddy — a cheerful chocolate labrador" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Buddy</div><div class="cmeta">#166–220 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/max.jpg" alt="Max — a loyal German Shepherd" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Max</div><div class="cmeta">#221–275 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/charlie.jpg" alt="Charlie — a cheerful corgi" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Charlie</div><div class="cmeta">#276–330 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/cooper.jpg" alt="Cooper — a clever Shiba Inu" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Cooper</div><div class="cmeta">#331–385 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/duke.jpg" alt="Duke — an elegant white poodle" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Duke</div><div class="cmeta">#386–440 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/teddy.jpg" alt="Teddy — a fluffy cream Pomeranian with a pink bow" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Teddy</div><div class="cmeta">#441–495 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/bailey.jpg" alt="Bailey — a golden cocker spaniel" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Bailey</div><div class="cmeta">#496–550 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/lucky.jpg" alt="Lucky — a playful Dalmatian" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Lucky</div><div class="cmeta">#551–605 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="common"><img src="assets/scout.jpg" alt="Scout — a Siberian Husky with ice-blue eyes" loading="lazy"><div class="cbody"><span class="badge common">Common</span><div class="cname">Scout</div><div class="cmeta">#606–660 · 55 cards · ref 0.002 BNB</div></div></div>
+      <div class="card" data-tier="rare"><img src="assets/shadow.jpg" alt="Shadow — a sleek black Doberman" loading="lazy"><div class="cbody"><span class="badge rare">Rare</span><div class="cname">Shadow</div><div class="cmeta">#661–707 · 47 cards · ref 0.005 BNB</div></div></div>
+      <div class="card" data-tier="rare"><img src="assets/luna.jpg" alt="Luna — a fluffy white Samoyed under the crescent moon" loading="lazy"><div class="cbody"><span class="badge rare">Rare</span><div class="cname">Luna</div><div class="cmeta">#708–754 · 47 cards · ref 0.005 BNB</div></div></div>
+      <div class="card" data-tier="rare"><img src="assets/storm.jpg" alt="Storm — a grey Staffy in storm clouds" loading="lazy"><div class="cbody"><span class="badge rare">Rare</span><div class="cname">Storm</div><div class="cmeta">#755–801 · 47 cards · ref 0.005 BNB</div></div></div>
+      <div class="card" data-tier="rare"><img src="assets/blaze.jpg" alt="Blaze — a copper Vizsla with fire in its eyes" loading="lazy"><div class="cbody"><span class="badge rare">Rare</span><div class="cname">Blaze</div><div class="cmeta">#802–848 · 47 cards · ref 0.005 BNB</div></div></div>
+      <div class="card" data-tier="rare"><img src="assets/nova.jpg" alt="Nova — an Akita wrapped in a cosmic nebula" loading="lazy"><div class="cbody"><span class="badge rare">Rare</span><div class="cname">Nova</div><div class="cmeta">#849–895 · 47 cards · ref 0.005 BNB</div></div></div>
+      <div class="card" data-tier="rare"><img src="assets/zeus.jpg" alt="Zeus — a Great Dane crowned in golden lightning" loading="lazy"><div class="cbody"><span class="badge rare">Rare</span><div class="cname">Zeus</div><div class="cmeta">#896–942 · 47 cards · ref 0.005 BNB</div></div></div>
+      <div class="card" data-tier="epic"><img src="assets/phantom.jpg" alt="Phantom — a spectral Border Collie in blue mist" loading="lazy"><div class="cbody"><span class="badge epic">Epic</span><div class="cname">Phantom</div><div class="cmeta">#943–977 · 35 cards · ref 0.012 BNB</div></div></div>
+      <div class="card" data-tier="epic"><img src="assets/titan.jpg" alt="Titan — a massive Mastiff, bronze and stone" loading="lazy"><div class="cbody"><span class="badge epic">Epic</span><div class="cname">Titan</div><div class="cmeta">#978–1012 · 35 cards · ref 0.012 BNB</div></div></div>
+      <div class="card" data-tier="epic"><img src="assets/aurora.jpg" alt="Aurora — a Lapphund under the aurora borealis" loading="lazy"><div class="cbody"><span class="badge epic">Epic</span><div class="cname">Aurora</div><div class="cmeta">#1013–1047 · 35 cards · ref 0.012 BNB</div></div></div>
+      <div class="card" data-tier="legendary"><img src="assets/kingbark.jpg" alt="King Bark — a Cavalier wearing a golden crown" loading="lazy"><div class="cbody"><span class="badge legendary">Legendary</span><div class="cname">King Bark</div><div class="cmeta">#1048–1072 · 25 cards · ref 0.03 BNB</div></div></div>
+      <div class="card" data-tier="legendary"><img src="assets/moonfang.jpg" alt="Moonfang — a wolfdog baring its fangs under the full moon" loading="lazy"><div class="cbody"><span class="badge legendary">Legendary</span><div class="cname">Moonfang</div><div class="cmeta">#1073–1097 · 25 cards · ref 0.03 BNB</div></div></div>
+      <div class="card" data-tier="mythic"><img src="assets/thealpha.jpg" alt="The Alpha — the golden-maned leader of the pack" loading="lazy"><div class="cbody"><span class="badge mythic">Mythic</span><div class="cname">The Alpha</div><div class="cmeta">#1098–1111 · 14 cards · ref 0.1 BNB</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RARITY -->
+<section id="rarity">
+  <div class="wrap">
+    <p class="eyebrow">Rarity</p>
+    <h2>Five tiers, one random deck</h2>
+    <p>Every mint draws a random card from a single shuffled deck of 1,111 — free and paid mints share the same deck, so a free mint can pull any card, including The Alpha. The deck never favours anyone — the odds below are the deck shares at mint open. The only limit is the free-claim cap: the first 1,000 free claims are free (1 per Agent ID wallet), then the free mint closes automatically and every mint after that is paid. Ref prices are the reference prices used for the marketplace floor (listings must be at least 80% of ref price).</p>
+    <div style="overflow-x:auto">
+    <table>
+      <thead><tr><th>Tier</th><th>Cards</th><th>Supply</th><th>Chance</th><th>Ref price</th><th>ID range</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:var(--common)"></span>Common</td><td>12</td><td>660</td><td>59.41%</td><td>0.002 BNB</td><td>#1–660</td></tr>
+        <tr><td><span class="dot" style="background:var(--rare)"></span>Rare</td><td>6</td><td>282</td><td>25.38%</td><td>0.005 BNB</td><td>#661–942</td></tr>
+        <tr><td><span class="dot" style="background:var(--epic)"></span>Epic</td><td>3</td><td>105</td><td>9.45%</td><td>0.012 BNB</td><td>#943–1047</td></tr>
+        <tr><td><span class="dot" style="background:var(--legendary)"></span>Legendary</td><td>2</td><td>50</td><td>4.50%</td><td>0.03 BNB</td><td>#1048–1097</td></tr>
+        <tr><td><span class="dot" style="background:var(--mythic)"></span>Mythic</td><td>1 — The Alpha</td><td>14</td><td>1.26%</td><td>0.1 BNB</td><td>#1098–1111</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note" style="margin-top:12px">Per-card ranges: Biscuit #1–55, Milo #56–110, Rocky #111–165, Buddy #166–220, Max #221–275, Charlie #276–330, Cooper #331–385, Duke #386–440, Teddy #441–495, Bailey #496–550, Lucky #551–605, Scout #606–660 · Shadow #661–707, Luna #708–754, Storm #755–801, Blaze #802–848, Nova #849–895, Zeus #896–942 · Phantom #943–977, Titan #978–1012, Aurora #1013–1047 · King Bark #1048–1072, Moonfang #1073–1097 · The Alpha #1098–1111.</p>
+  </div>
+</section>
+
+<!-- MINT -->
+<section id="mint" style="background:var(--bg2)">
+  <div class="wrap">
+    <p class="eyebrow">Mint</p>
+    <h2>Claim your dog</h2>
+    <p>Planned prices — <strong style="color:var(--ink)">#1 FREE</strong> · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20 per wallet (1 free + 19 paid) · max 0.00965 BNB per wallet. The free mint is limited to the <strong style="color:var(--ink)">first 1,000 free claims overall</strong> (1 per Agent ID wallet) — once 1,000 free claims are used, the free mint closes automatically and every mint after that is paid. Minting opens after the contracts deploy. Opening time will be shown here in UTC.</p>
+    <div class="mint-grid">
+      <div class="panel" id="mintPanel">
+        <h3>Mint panel</h3>
+        <p class="note">Minting is currently disabled — this is a preview page. The panel below will go live the moment the contracts deploy.</p>
+        <button class="btn btn-ghost" id="connectBtn" type="button" style="margin-top:12px">Connect Wallet</button>
+        <p class="mp-acct" id="acctLine">Wallet not connected</p>
+        <div class="qty-row">
+          <button id="qtyMinus" type="button" aria-label="Decrease quantity">−</button>
+          <span class="qty-val" id="qtyVal">1</span>
+          <button id="qtyPlus" type="button" aria-label="Increase quantity">+</button>
+          <span class="note">paid mint(s)</span>
+        </div>
+        <div class="mp-total"><span>Total</span><strong id="mpTotal">0.00035 BNB</strong><span class="mp-free" id="mpFree">+ your FREE first mint</span></div>
+        <p class="note" id="mpWalletInfo" style="margin:12px 0 0"></p>
+        <button class="btn btn-gold" id="freeBtn" type="button" style="width:100%;margin-top:14px" disabled>Claim FREE mint</button>
+        <button class="btn btn-gold" id="mintBtn" type="button" style="width:100%;margin-top:10px" disabled>Mint</button>
+        <p class="mp-status" id="mpStatus" role="status" aria-live="polite">Preview mode — minting opens after deploy.</p>
+      </div>
+      <div>
+        <div class="panel" style="margin-bottom:16px">
+          <h3>Agent ID checker</h3>
+          <p class="note">Minting requires a SPACE ID Agent ID on the minting wallet. Paste any wallet address to check it (no wallet connection needed).</p>
+          <div class="check-row">
+            <input id="checkAddr" type="text" placeholder="0x…" autocomplete="off" spellcheck="false">
+            <button class="btn btn-gold" id="checkBtn" type="button">Check</button>
+          </div>
+          <p class="check-result" id="checkResult"></p>
+          <p class="note">Registry: <span class="mono">0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F</span> (SPACE ID Agent ID, BNB Chain)</p>
+        </div>
+        <div class="panel">
+          <h3>Mint with your agent</h3>
+          <p class="note">Copy this prompt into your Binance Agentic Wallet and let your agent mint for you:</p>
+          <div class="agent-prompt" id="agentPrompt">Mint a Woof Agent NFT for me on BNB Chain.
+
+Woof Agent is a 1,111-supply BEP-721 collection. My first mint is FREE (I hold a SPACE ID Agent ID) — free claims are limited to the first 1,000 overall, one per wallet; after that the free mint closes and every mint is paid. Paid mints cost 0.00035 BNB for mints #2-10 and 0.00065 BNB for mints #11-20, max 20 per wallet.
+
+Check my Agent ID on the SPACE ID registry (0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F), then call mintFree() for my free mint, or mintPaid(n) for paid mints, on the Woof Agent NFT contract. Confirm the price with quotePaidFor(myAddress, n) before sending, and show me the transaction hash and the token ID I received.</div>
+          <button class="btn btn-ghost" id="copyPromptBtn" type="button" style="margin-top:10px">Copy prompt</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKEN -->
+<section id="token">
+  <div class="wrap">
+    <p class="eyebrow">Token</p>
+    <h2>$WOOF — the pack's reward</h2>
+    <p>Every paid mint earns a flat <strong style="color:var(--ink)">1,200 $WOOF</strong>. Free mints earn 0 $WOOF. Claim your accrued $WOOF any time from the contract — no lock-up, no vesting.</p>
+    <div class="two-col">
+      <div class="panel">
+        <h3>Supply</h3>
+        <div class="stat-list">
+          <div><span>Total supply</span><b>10,000,000 $WOOF</b></div>
+          <div><span>Reward pool (held by token contract)</span><b>5,400,000 $WOOF</b></div>
+          <div><span>Treasury (owner)</span><b>4,600,000 $WOOF</b></div>
+          <div><span>Per paid mint</span><b>1,200 $WOOF</b></div>
+          <div><span>Max per wallet</span><b>22,800 $WOOF</b></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>How it works</h3>
+        <div class="stat-list">
+          <div><span>Free mint</span><b>0 $WOOF</b></div>
+          <div><span>Paid mint (any tier)</span><b>1,200 $WOOF</b></div>
+          <div><span>19 paid mints = wallet max</span><b>22,800 $WOOF</b></div>
+          <div><span>Claim</span><b>Any time, on-chain</b></div>
+          <div><span>Pool cap</span><b>5.4M — first come, first served</b></div>
+        </div>
+        <p class="note" style="margin-top:12px">The reward pool can pay at most 5,400,000 $WOOF. If paid mints ever outgrow the pool, later claims wait for the pool — the contract never mints beyond 10M total.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETPLACE -->
+<section id="marketplace" style="background:var(--bg2)">
+  <div class="wrap">
+    <p class="eyebrow">Marketplace</p>
+    <h2>Trade your dogs</h2>
+    <p>The Woof Agent marketplace is an on-chain escrow: when you list, your card moves into the marketplace contract. When someone buys, the card moves to them and the BNB moves to you — no middleman holding funds.</p>
+    <div class="two-col">
+      <div class="panel">
+        <h3>Selling</h3>
+        <div class="stat-list">
+          <div><span>Seller receives</span><b>95% of sale price</b></div>
+          <div><span>Royalty (to project)</span><b>5%</b></div>
+          <div><span>List fee</span><b>0.00025 BNB</b></div>
+          <div><span>Cancel / delist fee</span><b>0.00025 BNB</b></div>
+          <div><span>Price floor</span><b>≥ 80% of the card's ref price</b></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Buying</h3>
+        <div class="stat-list">
+          <div><span>Buyer pays</span><b>Listing price, exactly</b></div>
+          <div><span>Buyer fee</span><b>None</b></div>
+          <div><span>Escrow</span><b>Card held by contract until sold</b></div>
+          <div><span>Ref prices</span><b>Common 0.002 · Rare 0.005 · Epic 0.012 · Legendary 0.03 · Mythic 0.1 BNB</b></div>
+        </div>
+        <p style="margin-top:14px"><a class="btn btn-gold" href="market.html">Open the marketplace</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>Questions, answered</h2>
+    <details class="faq-item"><summary>What is Woof Agent?</summary><p>Woof Agent is a 1,111-supply NFT collection of 24 original dog cards on BNB Chain. Each mint draws a random card from the deck. It is built for Binance Agentic Wallet users — minting requires a SPACE ID Agent ID.</p></details>
+    <details class="faq-item"><summary>How much does it cost to mint?</summary><p>Your first mint is FREE. Paid mints cost 0.00035 BNB for mints #2–10 and 0.00065 BNB for mints #11–20. Maximum 20 mints per wallet, so the most one wallet ever pays is 0.00965 BNB.</p></details>
+    <details class="faq-item"><summary>Do I need an Agent ID?</summary><p>Yes. Both the free mint and paid mints are agent-only: the contract checks that your wallet holds a SPACE ID Agent ID. Use the checker in the mint panel to verify any address before you mint.</p></details>
+    <details class="faq-item"><summary>Is the mint random?</summary><p>Yes. The contract draws from one shuffled deck (swap-and-pop), shared by free and paid mints, so every remaining card has an equal chance on every mint — a free mint can pull any card, including The Alpha. There is no way to pick a specific card, and no mint is reserved.</p></details>
+    <details class="faq-item"><summary>How long is the free mint open?</summary><p>Until the first 1,000 free claims are used. Each Agent ID wallet gets 1 free mint. Once 1,000 wallets have claimed, the free mint closes automatically — no owner action, no announcement — and every mint after that is paid. Paid mints keep drawing from the same deck until all 1,111 are minted.</p></details>
+    <details class="faq-item"><summary>How do I earn $WOOF?</summary><p>Every paid mint accrues a flat 1,200 $WOOF. Free mints accrue 0. Claim your $WOOF on-chain any time. The most one wallet can earn is 22,800 $WOOF (19 paid mints).</p></details>
+    <details class="faq-item"><summary>What is the marketplace floor rule?</summary><p>Listings must be priced at 80% or more of the card's reference price: Common 0.002, Rare 0.005, Epic 0.012, Legendary 0.03, Mythic 0.1 BNB. The seller keeps 95% of the sale; 5% is the project royalty. Listing and cancelling each cost 0.00025 BNB.</p></details>
+    <details class="faq-item"><summary>When does mint open?</summary><p>Mint opens after the contracts deploy. The opening time will be shown on this page in UTC. This page is currently a preview — minting is disabled until then.</p></details>
+    <details class="faq-item"><summary>Is there a roadmap or promise of returns?</summary><p>No. Woof Agent is a collectible. Nothing on this page is a promise of profit, price, or future value. Buy a card because you like the dog.</p></details>
+  </div>
+</section>
+
+<!-- DETAILS / CONTRACTS -->
+<section id="details" style="background:var(--bg2)">
+  <div class="wrap">
+    <p class="eyebrow">Details</p>
+    <h2>Contracts &amp; facts</h2>
+    <div class="details-grid">
+      <div><span>Chain</span><span>BNB Smart Chain (chain ID 56)</span></div>
+      <div><span>Standard</span><span>BEP-721 (ERC-721), random deck-draw (swap-and-pop)</span></div>
+      <div><span>Supply</span><span>1,111 — Common 660 · Rare 282 · Epic 105 · Legendary 50 · Mythic 14</span></div>
+      <div><span>Mint price</span><span>#1 FREE · #2–10 @ 0.00035 BNB · #11–20 @ 0.00065 BNB · max 20 / wallet</span></div>
+      <div><span>Free claims</span><span>First 1,000 free claims overall (1 per Agent ID wallet); mintFree closes automatically at 1,000 — all mints paid after that</span></div>
+      <div><span>Gate</span><span>SPACE ID Agent ID — registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F, wallet must be the transaction sender</span></div>
+      <div><span>Royalty</span><span>5% (ERC-2981) to 0x36F3D56eAD5D1D6C2434F94DeFcEF732C5C3CbD2</span></div>
+      <div><span>$WOOF</span><span>10,000,000 total — 5.4M reward pool / 4.6M treasury — 1,200 per paid mint, max 22,800 / wallet</span></div>
+      <div><span>Marketplace</span><span>Own escrow — seller 95% / royalty 5%, list &amp; cancel fee 0.00025 BNB, floor 80% of ref price</span></div>
+      <div><span>NFT contract</span><span id="nftAddrLine">Not deployed yet — the address will appear here after deploy.</span></div>
+      <div><span>$WOOF contract</span><span id="tokenAddrLine">Not deployed yet — the address will appear here after deploy.</span></div>
+      <div><span>Market contract</span><span id="marketAddrLine">Not deployed yet — the address will appear here after deploy.</span></div>
+      <div><span>Metadata</span><span class="mono">https://woof-agent.vercel.app/metadata/&lt;tokenId&gt;</span></div>
+      <div><span>Mint opens</span><span>To be announced (UTC)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHARE -->
+<section id="share">
+  <div class="wrap" style="text-align:center">
+    <p class="eyebrow">Share</p>
+    <h2>Found your dog? Tell the pack.</h2>
+    <p style="max-width:560px;margin:0 auto 18px">Share Woof Agent with your friends — every share helps the pack grow.</p>
+    <a class="btn btn-gold" id="shareX" href="https://twitter.com/intent/tweet?text=Woof%20Agent%20%E2%80%94%2024%20loyal%20dogs%2C%20on-chain.%20First%20mint%20FREE%20for%20Agent%20ID%20holders%2C%201%2C111%20cards%2C%201%2C200%20%24WOOF%20per%20paid%20mint.%20https%3A%2F%2Fwoof-agent.vercel.app%2F" target="_blank" rel="noopener">Share on X</a>
+    <button class="btn btn-ghost" id="copyLinkBtn" type="button" style="margin-left:8px">Copy page link</button>
+    <p class="note" id="copyLinkNote" style="margin-top:10px"></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--ink)">Woof Agent</strong> — 24 loyal dogs, on-chain. Built on BNB Chain.</p>
+    <p style="margin-top:6px">Collectible NFTs. Nothing here is financial advice or a promise of returns. Mint at your own risk — verify the contract address on BscScan before you send anything.</p>
+    <p style="margin-top:6px">© 2026 Woof Agent</p>
+  </div>
+</footer>
+
+<a class="btn btn-gold fab" href="#mint">🐶 Mint</a>
+
+<script>
+(function(){
+  "use strict";
+  // ---- CONFIG (preview: contracts not deployed yet) ----
+  var NFT = null;      // Woof Agent NFT contract — set after deploy
+  var TOKEN = null;    // $WOOF token contract — set after deploy
+  var MARKET = null;   // Woof Agent marketplace — set after deploy
+  var SUPPLY = 1111, MAXW = 20, MAX_PAID = 19;
+  var RPCS = ['https://bsc-dataseed.binance.org/','https://bsc-dataseed1.defibit.io/','https://bsc-dataseed2.defibit.io/'];
+  var REGISTRY = '0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F';
+  var SEL = { totalMinted:'0xa2309ff8', paidMinted:'0x2806b8fb', freeMinted:'0xd10a1a2b', deckRemaining:'0xc434f97d', mintOpen:'0x24bbd049',
+    quote:'0xfba2a03e', mintedOf:'0x617692dd', freeMintedOf:'0xf7b856b1', paidMintedOf:'0xb41e2f7b',
+    balanceOf:'0x70a08231', mintFree:'0x8ab53447', mintPaid:'0x26c7f77c' };
+  var TIER_TOTALS = [660, 282, 105, 50, 14];
+  var $ = function(id){ return document.getElementById(id); };
+
+  // ---- Gallery filter ----
+  var filterBtns = document.querySelectorAll('#filters button');
+  var cards = document.querySelectorAll('#galleryGrid .card');
+  filterBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      filterBtns.forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      var f = b.getAttribute('data-filter');
+      cards.forEach(function(c){ c.style.display = (f === 'all' || c.getAttribute('data-tier') === f) ? '' : 'none'; });
+    });
+  });
+
+  // ---- Live status: paw trail (1 paw every 111 mints; last at sold out) ----
+  var MILESTONES = [111, 222, 333, 444, 555, 666, 777, 888, 999, 1111];
+  var trail = $('pawTrail');
+  for (var i = 0; i < MILESTONES.length; i++){
+    var s = document.createElement('span');
+    s.innerHTML = '🐾<small>' + MILESTONES[i].toLocaleString('en-US') + '</small>';
+    trail.appendChild(s);
+  }
+  var minted = 0, paid = 0, freeUsed = 0, deckLeft = SUPPLY;
+  function renderLive(){
+    var m = Math.max(0, Math.min(SUPPLY, minted));
+    var pct = m / SUPPLY * 100;
+    $('liveMinted').textContent = m.toLocaleString('en-US');
+    $('liveBarFill').style.width = pct + '%';
+    $('ringPct').textContent = (Math.round(pct * 10) / 10) + '%';
+    $('ringFill').style.strokeDashoffset = (414.7 * (1 - m / SUPPLY)).toFixed(1);
+    var paws = trail.children;
+    for (var i = 0; i < paws.length; i++) paws[i].classList.toggle('on', m >= MILESTONES[i]);
+    $('liveFree').textContent = freeUsed.toLocaleString('en-US') + ' / 1,000';
+    if (NFT){
+      $('livePaid').textContent = '· ' + paid.toLocaleString('en-US') + ' paid · ' + deckLeft.toLocaleString('en-US') + ' left in deck';
+      $('liveNote').firstChild.textContent = 'Live on-chain. ';
+    }
+    // Tier bars: the deck is a single mixed deck, so per-tier minted counts are
+    // NOT readable on-chain. Bars show overall deck progress; lines show each
+    // tier's total and deck share — never a fabricated per-tier count.
+    var tierShare = ['59.41% of deck', '25.38% of deck', '9.45% of deck', '4.50% of deck', '1.26% of deck'];
+    for (var t = 0; t < 5; t++){
+      var fill = $('tierFill' + t), line = $('tierLine' + t);
+      if (!fill || !line) continue;
+      fill.style.width = (NFT ? pct : 0) + '%';
+      line.textContent = TIER_TOTALS[t].toLocaleString('en-US') + ' total · ' + tierShare[t];
+    }
+  }
+  function rpcCall(to, data, idx){
+    idx = idx || 0;
+    return fetch(RPCS[idx], { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ jsonrpc:'2.0', id:1, method:'eth_call', params:[{ to: to, data: data }, 'latest'] })
+    }).then(function(r){ return r.json(); }).then(function(j){
+      if (!j || !j.result || j.result === '0x') throw new Error('no result');
+      return j.result;
+    }).catch(function(e){
+      if (idx + 1 < RPCS.length) return rpcCall(to, data, idx + 1);
+      throw e;
+    });
+  }
+  function pollLive(){
+    if (!NFT) { renderLive(); return; }
+    rpcCall(NFT, SEL.totalMinted).then(function(r){ minted = parseInt(r, 16) || 0; renderLive(); }).catch(function(){});
+    rpcCall(NFT, SEL.paidMinted).then(function(r){ paid = parseInt(r, 16) || 0; renderLive(); }).catch(function(){});
+    rpcCall(NFT, SEL.freeMinted).then(function(r){ freeUsed = parseInt(r, 16) || 0; renderLive(); }).catch(function(){});
+    rpcCall(NFT, SEL.deckRemaining).then(function(r){ deckLeft = parseInt(r, 16); renderLive(); }).catch(function(){});
+  }
+  renderLive();
+  if (NFT) { pollLive(); setInterval(pollLive, 30000); }
+
+  // ---- Mint panel ----
+  var account = null, qty = 1, myCount = 0, freeUsed = null, hasAgent = null, busy = false, quoteWei = null;
+  var connectBtn = $('connectBtn'), acctLine = $('acctLine'), qtyVal = $('qtyVal'),
+      minusBtn = $('qtyMinus'), plusBtn = $('qtyPlus'), totalEl = $('mpTotal'), freeEl = $('mpFree'),
+      infoEl = $('mpWalletInfo'), mintBtn = $('mintBtn'), freeBtn = $('freeBtn'), statusEl = $('mpStatus');
+  function short(a){ return a ? a.slice(0, 6) + '…' + a.slice(-4) : ''; }
+  function padAddr(a){ return a.toLowerCase().replace('0x','').padStart(64,'0'); }
+  function padUint(n){ return BigInt(n).toString(16).padStart(64,'0'); }
+  function fmtBNB(wei){
+    if (wei === null || wei === undefined) return '— BNB';
+    var v = Number(wei) / 1e18;
+    return (Math.round(v * 100000) / 100000).toString() + ' BNB';
+  }
+  // Price ladder by PAID count: paid #1-9 @ 0.00035, paid #10-19 @ 0.00065.
+  function ladderQuote(paidStart, n){
+    var total = 0n;
+    for (var i = 1; i <= n; i++){
+      var pos = paidStart + i;
+      total += (pos <= 9) ? 350000000000000n : 650000000000000n;
+    }
+    return total;
+  }
+  function setStatus(kind, html){
+    statusEl.className = 'mp-status' + (kind ? ' ' + kind : '');
+    statusEl.innerHTML = html || '';
+  }
+  function render(){
+    if (account){
+      connectBtn.textContent = 'Connected: ' + short(account);
+      acctLine.innerHTML = '<strong>' + short(account) + '</strong> · BNB Chain (56)';
+    } else {
+      connectBtn.textContent = 'Connect Wallet';
+      acctLine.textContent = 'Wallet not connected';
+    }
+    var maxQty = account ? Math.max(0, MAXW - myCount) : MAX_PAID;
+    var maxPaidQty = account ? Math.max(0, MAX_PAID - Math.max(0, myCount - 1)) : MAX_PAID;
+    if (qty > Math.max(1, maxPaidQty)) qty = Math.max(1, maxPaidQty);
+    if (qty < 1) qty = 1;
+    qtyVal.textContent = qty;
+    minusBtn.disabled = busy || qty <= 1;
+    plusBtn.disabled = busy || qty >= Math.max(1, maxPaidQty);
+    var paidStart = account ? Math.max(0, myCount - 1) : 0;
+    totalEl.textContent = fmtBNB(quoteWei !== null ? quoteWei : ladderQuote(paidStart, qty));
+    if (account && freeUsed === false) freeEl.textContent = '+ your FREE first mint';
+    else if (account && freeUsed === true) freeEl.textContent = 'Free mint already used';
+    else freeEl.textContent = '+ your FREE first mint';
+    if (account){
+      var parts = ['Your mints: ' + myCount + ' / ' + MAXW];
+      if (hasAgent === true) parts.push('Agent ID detected on this wallet.');
+      if (hasAgent === false) parts.push('No Agent ID found on this wallet — minting will revert. Get a SPACE ID Agent ID first.');
+      infoEl.textContent = parts.join(' ');
+    } else infoEl.textContent = '';
+    var disabled = busy || !NFT || !account;
+    freeBtn.disabled = disabled || (freeUsed === true) || myCount >= MAXW;
+    mintBtn.disabled = disabled || maxQty <= 0;
+    mintBtn.textContent = qty > 1 ? 'Mint ' + qty : 'Mint';
+    if (!NFT) setStatus('', 'Preview mode — minting opens after deploy.');
+  }
+  function refreshQuote(){
+    if (!NFT || !account){ quoteWei = null; render(); return; }
+    rpcCall(NFT, SEL.quote + padAddr(account) + padUint(qty)).then(function(res){
+      quoteWei = BigInt('0x' + res.slice(2, 66)); render();
+    }).catch(function(){ quoteWei = ladderQuote(Math.max(0, myCount - 1), qty); render(); });
+  }
+  function refreshWallet(){
+    if (!account){ refreshQuote(); return; }
+    rpcCall(NFT, SEL.mintedOf + padAddr(account)).then(function(res){ myCount = parseInt(res, 16) || 0; refreshQuote(); render(); }).catch(function(){ refreshQuote(); render(); });
+    rpcCall(NFT, SEL.freeMintedOf + padAddr(account)).then(function(res){ freeUsed = parseInt(res, 16) > 0; render(); }).catch(function(){});
+    rpcCall(REGISTRY, SEL.balanceOf + padAddr(account)).then(function(res){ hasAgent = parseInt(res, 16) > 0; render(); }).catch(function(){});
+  }
+  function ensureChain(){
+    return window.ethereum.request({ method:'eth_chainId' }).then(function(cid){
+      if (cid === '0x38') return;
+      setStatus('', 'Switching to BNB Chain…');
+      return window.ethereum.request({ method:'wallet_switchEthereumChain', params:[{ chainId:'0x38' }] }).catch(function(e){
+        if (e && e.code === 4902){
+          return window.ethereum.request({ method:'wallet_addEthereumChain', params:[{ chainId:'0x38', chainName:'BNB Smart Chain', nativeCurrency:{ name:'BNB', symbol:'BNB', decimals:18 }, rpcUrls:['https://bsc-dataseed.binance.org/'], blockExplorerUrls:['https://bscscan.com'] }] });
+        }
+        throw e;
+      });
+    });
+  }
+  function connect(){
+    if (!window.ethereum){ setStatus('err', 'No wallet found. Install a wallet (e.g. Binance Wallet) and try again.'); return; }
+    busy = true; render();
+    window.ethereum.request({ method:'eth_requestAccounts' }).then(function(accs){
+      account = accs && accs[0] ? accs[0] : null;
+      return ensureChain();
+    }).then(function(){ busy = false; setStatus('', NFT ? '' : 'Preview mode — minting opens after deploy.'); refreshWallet(); render(); })
+    .catch(function(e){
+      busy = false;
+      setStatus('err', (e && e.code === 4001) ? 'Rejected in the wallet.' : 'Could not connect wallet.');
+      render();
+    });
+  }
+  function doFree(){
+    if (!NFT){ setStatus('err', 'Contracts not deployed yet.'); return; }
+    if (!account){ setStatus('err', 'Connect your wallet first.'); return; }
+    if (hasAgent === false){ setStatus('err', 'No Agent ID found on this wallet.'); return; }
+    busy = true; render();
+    ensureChain().then(function(){
+      return window.ethereum.request({ method:'eth_sendTransaction', params:[{ from: account, to: NFT, data: SEL.mintFree, value:'0x0' }] });
+    }).then(function(tx){
+      busy = false;
+      setStatus('ok', 'Free mint sent! Tx: <a href="https://bscscan.com/tx/' + tx + '" target="_blank" rel="noopener">' + String(tx).slice(0, 10) + '…</a>');
+      refreshWallet(); render();
+    }).catch(function(e){
+      busy = false;
+      setStatus('err', (e && e.code === 4001) ? 'Rejected in the wallet.' : 'Free mint failed.');
+      render();
+    });
+  }
+  function doMint(){
+    if (!NFT){ setStatus('err', 'Contracts not deployed yet.'); return; }
+    if (!account){ setStatus('err', 'Connect your wallet first.'); return; }
+    if (hasAgent === false){ setStatus('err', 'No Agent ID found on this wallet.'); return; }
+    busy = true; render();
+    ensureChain().then(function(){
+      return rpcCall(NFT, SEL.quote + padAddr(account) + padUint(qty));
+    }).then(function(res){
+      var value = BigInt('0x' + res.slice(2, 66));
+      quoteWei = value;
+      return window.ethereum.request({ method:'eth_sendTransaction', params:[{ from: account, to: NFT, data: SEL.mintPaid + padUint(qty), value:'0x' + value.toString(16) }] });
+    }).then(function(tx){
+      busy = false;
+      setStatus('ok', 'Mint sent! Tx: <a href="https://bscscan.com/tx/' + tx + '" target="_blank" rel="noopener">' + String(tx).slice(0, 10) + '…</a>');
+      refreshWallet(); render();
+    }).catch(function(e){
+      busy = false;
+      setStatus('err', (e && e.code === 4001) ? 'Rejected in the wallet.' : 'Mint failed.');
+      render();
+    });
+  }
+  connectBtn.addEventListener('click', connect);
+  freeBtn.addEventListener('click', doFree);
+  mintBtn.addEventListener('click', doMint);
+  minusBtn.addEventListener('click', function(){ if (qty > 1){ qty--; refreshQuote(); render(); } });
+  plusBtn.addEventListener('click', function(){
+    var m = account ? Math.max(1, MAX_PAID - Math.max(0, myCount - 1)) : MAX_PAID;
+    if (qty < m){ qty++; refreshQuote(); render(); }
+  });
+  if (window.ethereum && window.ethereum.on){
+    window.ethereum.on('accountsChanged', function(accs){ account = accs && accs[0] ? accs[0] : null; myCount = 0; hasAgent = null; freeUsed = null; refreshWallet(); render(); });
+    window.ethereum.on('chainChanged', function(){ refreshWallet(); render(); });
+  }
+  render();
+
+  // ---- Agent ID checker (any address, public RPC) ----
+  var checkBtn = $('checkBtn'), checkAddr = $('checkAddr'), checkResult = $('checkResult');
+  checkBtn.addEventListener('click', function(){
+    var a = (checkAddr.value || '').trim();
+    if (!/^0x[0-9a-fA-F]{40}$/.test(a)){ checkResult.textContent = 'Enter a valid wallet address (0x + 40 hex characters).'; return; }
+    checkResult.textContent = 'Checking…';
+    rpcCall(REGISTRY, SEL.balanceOf + padAddr(a)).then(function(res){
+      var n = parseInt(res, 16);
+      checkResult.textContent = isNaN(n) ? 'Could not read the registry. Try again.'
+        : (n > 0 ? '✅ ' + short(a) + ' holds ' + n + ' Agent ID(s) — it can mint.' : '❌ ' + short(a) + ' holds no Agent ID — minting would revert.');
+    }).catch(function(){ checkResult.textContent = 'Could not reach the network. Try again.'; });
+  });
+
+  // ---- Copy prompt / copy link ----
+  var copyBtn = $('copyPromptBtn');
+  copyBtn.addEventListener('click', function(){
+    var txt = $('agentPrompt').textContent;
+    function done(){ copyBtn.textContent = 'Copied'; setTimeout(function(){ copyBtn.textContent = 'Copy prompt'; }, 1800); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done).catch(done);
+    else { var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch(e){} document.body.removeChild(ta); done(); }
+  });
+  $('copyLinkBtn').addEventListener('click', function(){
+    var url = window.location.href;
+    function done(){ $('copyLinkNote').textContent = 'Link copied.'; }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done).catch(done);
+    else { var ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch(e){} document.body.removeChild(ta); done(); }
+  });
+})();
+</script>
+</body>
+</html>
